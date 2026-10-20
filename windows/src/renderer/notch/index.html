@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' file: data:; media-src 'self' file:">
+  <title>Focus Notch</title>
+  <link rel="stylesheet" href="notch.css">
+</head>
+<body>
+  <svg id="shape" width="760" height="300" aria-hidden="true"><path id="shape-path" fill="#000"/></svg>
+
+  <div id="stage">
+    <section class="view" id="compact" aria-hidden="true">
+      <div class="wing leading"><img class="pet" alt=""><span class="phase-icon"></span></div>
+      <div class="wing trailing">
+        <span class="mini-status"></span>
+        <span class="time compact-time"></span>
+      </div>
+    </section>
+
+    <section class="view" id="expanded" aria-hidden="true">
+      <header class="header">
+        <div class="side">
+          <span class="phase-badge"><i class="dot"></i><b class="phase-title"></b><span class="paused-label"></span></span>
+        </div>
+        <div class="side end">
+          <span class="today"><span class="flame"></span><b class="today-sessions"></b><span class="sep">·</span><span class="today-time"></span></span>
+          <button class="icon-button small" data-action="settings"></button>
+        </div>
+      </header>
+      <div class="main">
+        <button class="avatar" data-action="pet">
+          <svg class="ring" viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="45"/><circle class="progress" cx="50" cy="50" r="45"/></svg>
+          <img class="pet" alt=""><span class="phase-icon"></span>
+        </button>
+        <div class="time-column">
+          <div class="subtitle"></div>
+          <div class="time big-time"></div>
+          <div class="dots"></div>
+        </div>
+        <div class="controls">
+          <div class="trio">
+            <button class="icon-button" data-action="reset"></button>
+            <button class="icon-button primary" data-action="toggle"></button>
+            <button class="icon-button" data-action="skip"></button>
+          </div>
+          <button class="capsule" data-action="finish"></button>
+        </div>
+      </div>
+      <div class="topics">
+        <span class="tag-icon"></span>
+        <div class="chips"></div>
+      </div>
+    </section>
+
+    <section class="view" id="alert" aria-hidden="true">
+      <div class="alert-body">
+        <div class="alert-pet"><img class="pet" alt=""><span class="phase-icon"></span></div>
+        <div class="alert-text"><b class="alert-title"></b><p class="alert-message"></p></div>
+        <button class="capsule tinted" data-action="alertAction"></button>
+        <button class="icon-button small" data-action="dismissAlert"></button>
+      </div>
+    </section>
+  </div>
+
+  <script src="../shared/shared.js"></script>
+  <script src="notch.js"></script>
+</body>
+</html>

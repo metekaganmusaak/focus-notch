@@ -1,0 +1,296 @@
+:root {
+  --tint: #ff735c;
+  --notch-height: 34px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  width: 760px;
+  height: 300px;
+  overflow: hidden;
+  background: transparent;
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  color: #fff;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon { display: block; flex: none; }
+
+#shape {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  transition: filter 0.3s ease;
+}
+body.open #shape { filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45)); }
+
+#stage {
+  position: absolute;
+  inset: 0;
+}
+
+/* Every view sits at the top center at its final size; the stage is clipped to the
+   animated shape, so views are revealed by the shape instead of reflowing. */
+.view {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  opacity: 0;
+  filter: blur(6px);
+  scale: 0.94;
+  transform-origin: top center;
+  pointer-events: none;
+  transition: opacity 0.22s ease, filter 0.22s ease, scale 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+.view.active {
+  opacity: 1;
+  filter: none;
+  scale: 1;
+  pointer-events: auto;
+  transition-delay: 0.06s;
+}
+
+.pet { object-fit: contain; display: block; }
+.pet.pixel { image-rendering: pixelated; }
+.phase-icon { display: none; color: var(--tint); }
+.no-pet .pet { display: none; }
+.no-pet .phase-icon { display: grid; place-items: center; }
+
+.time {
+  font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  display: inline-flex;
+  direction: ltr;
+}
+.time .digit { display: inline-block; }
+.time .digit.roll { animation: roll 0.32s cubic-bezier(0.2, 0.8, 0.3, 1); }
+@keyframes roll {
+  from { transform: translateY(-40%); opacity: 0; filter: blur(2px); }
+  to { transform: none; opacity: 1; filter: none; }
+}
+
+/* Compact: pet and countdown on either side of the notch. */
+#compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 14px;
+}
+#compact .wing { display: flex; align-items: center; gap: 6px; }
+#compact .pet, #compact .phase-icon { width: 26px; height: 26px; }
+#compact .compact-time { font-size: 14px; color: var(--tint); }
+#compact .mini-status { color: var(--tint); display: grid; place-items: center; }
+#compact.idle-state .wing.trailing { opacity: 0.7; }
+
+/* Expanded */
+#expanded { display: flex; flex-direction: column; }
+.header {
+  height: var(--notch-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px;
+}
+.side { display: flex; align-items: center; gap: 10px; }
+.phase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--tint) 18%, transparent);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.phase-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--tint); }
+.running .phase-badge .dot { box-shadow: 0 0 8px var(--tint); }
+.paused-label { color: rgba(255, 255, 255, 0.5); font-size: 11px; }
+.today {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.today .flame { color: #ff9f43; }
+.today .sep { color: rgba(255, 255, 255, 0.35); }
+.today-time { color: rgba(255, 255, 255, 0.7); }
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
+}
+.avatar {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  place-items: center;
+  transition: scale 0.2s ease;
+}
+.avatar:active { scale: 0.95; }
+.avatar .pet, .avatar .phase-icon { width: 64px; height: 64px; }
+.ring { position: absolute; inset: 0; rotate: -90deg; }
+.ring circle { fill: none; stroke-width: 5; }
+.ring .track { stroke: rgba(255, 255, 255, 0.1); }
+.ring .progress {
+  stroke: var(--tint);
+  stroke-linecap: round;
+  stroke-dasharray: 282.74;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+
+.time-column { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.subtitle { font-size: 12px; color: rgba(255, 255, 255, 0.55); white-space: nowrap; }
+.big-time { font-size: 46px; line-height: 1.05; letter-spacing: -0.5px; }
+.dots { display: flex; gap: 5px; margin-top: 6px; }
+.dots i {
+  position: relative;
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+.dots i.current { width: 22px; }
+.dots i b { position: absolute; inset: 0 auto 0 0; background: var(--focus-tint, var(--tint)); border-radius: 99px; }
+
+.controls { margin-inline-start: auto; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.trio { display: flex; align-items: center; gap: 10px; }
+.icon-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.11);
+  transition: background 0.15s ease, scale 0.15s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+.icon-button:hover { background: rgba(255, 255, 255, 0.2); }
+.icon-button:active { scale: 0.9; }
+.icon-button.small { width: 22px; height: 22px; }
+.icon-button.primary {
+  width: 50px;
+  height: 50px;
+  color: rgba(0, 0, 0, 0.85);
+  background: var(--tint);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tint) 55%, transparent);
+}
+.icon-button.primary:hover { box-shadow: 0 0 20px color-mix(in srgb, var(--tint) 70%, transparent); }
+button:disabled { opacity: 0.35; pointer-events: none; }
+
+.capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.11);
+  transition: background 0.15s ease, scale 0.15s ease;
+}
+.capsule:hover { background: rgba(255, 255, 255, 0.2); }
+.capsule:active { scale: 0.95; }
+.capsule.tinted { background: var(--tint); color: rgba(0, 0, 0, 0.85); }
+
+.topics {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  margin: 0 22px 14px;
+}
+.tag-icon { color: rgba(255, 255, 255, 0.4); }
+.chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, #000 92%, transparent);
+}
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.chip:hover { background: rgba(255, 255, 255, 0.18); }
+.chip.selected { background: var(--tint); color: rgba(0, 0, 0, 0.85); }
+.chip-input {
+  flex: none;
+  width: 130px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1.2px solid var(--tint);
+  background: transparent;
+  color: #fff;
+  font: 600 11px "Segoe UI", system-ui, sans-serif;
+  outline: none;
+}
+
+/* Alert */
+#alert { display: flex; flex-direction: column; justify-content: flex-end; }
+.alert-body {
+  flex: 1;
+  margin-top: var(--notch-height);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+}
+.alert-pet {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--tint) 14%, transparent);
+}
+.alert-pet .pet, .alert-pet .phase-icon { width: 48px; height: 48px; }
+.alert-text { flex: 1; min-width: 0; }
+.alert-title { display: block; font-size: 15px; }
+.alert-message { margin: 3px 0 0; font-size: 12px; color: rgba(255, 255, 255, 0.65); line-height: 1.35; }
+
+/* Standing in a bottom taskbar: the shape grows upward, so the status strip moves to the bottom. */
+body.bottom-edge .view { top: auto; bottom: 0; transform-origin: bottom center; }
+body.bottom-edge #expanded { flex-direction: column-reverse; }
+body.bottom-edge .topics { margin: 14px 22px 0; }
+body.bottom-edge .alert-body { margin-top: 0; margin-bottom: var(--notch-height); }
+body.bottom-edge.open #shape { filter: drop-shadow(0 -8px 18px rgba(0, 0, 0, 0.45)); }
+.header { cursor: grab; }
+body.dragging, body.dragging .header { cursor: grabbing; }
