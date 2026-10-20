@@ -498,8 +498,12 @@ async function runSnapshots() {
     fs.writeFileSync(path.join(directory, `${name}.png`), image.toPNG());
   };
 
-  store.addTopic('Math');
-  store.addTopic('English');
+  // Sample data so the statistics tab has something to show.
+  const topics = ['Matematik', 'İngilizce', 'Kodlama'].map((name) => store.addTopic(name));
+  for (const [topic, sessions] of [[0, 4], [1, 2], [2, 3]]) {
+    for (let i = 0; i < sessions; i++) store.addFocus(25 * 60, true, topics[topic].id);
+  }
+  store.setSetting('currentTopicID', topics[0].id);
   await capture(notchWindow, 'notch-1-idle');
   engine.start();
   broadcast();

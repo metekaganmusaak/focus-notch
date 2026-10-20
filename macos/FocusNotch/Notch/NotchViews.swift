@@ -293,47 +293,54 @@ private struct TopicBar: View {
                 .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(.white.opacity(0.4))
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
-                    ForEach(model.topics.topics) { topic in
-                        let isSelected = model.settings.currentTopicID == topic.id
-                        Button(topic.name) {
-                            model.settings.currentTopicID = isSelected ? nil : topic.id
-                        }
-                        .buttonStyle(TopicChipStyle(tint: isSelected ? tint : nil))
-                    }
-
-                    if model.notch.isEditingTopic {
-                        TextField("New topic", text: $draft)
-                            .textFieldStyle(.plain)
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(.white)
-                            .focused($isFieldFocused)
-                            .frame(width: 120)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                            .background(Capsule().strokeBorder(tint.opacity(0.8), lineWidth: 1.2))
-                            .onSubmit(commit)
-                            .onExitCommand(perform: finishEditing)
-                    } else {
-                        Button {
-                            startEditing()
-                        } label: {
-                            if model.topics.topics.isEmpty {
-                                Label("Add topic", systemImage: "plus")
-                            } else {
-                                Image(systemName: "plus")
-                            }
-                        }
-                        .buttonStyle(TopicChipStyle(tint: nil))
-                        .help("Add topic")
-                    }
-                }
+            // Scroll only when the chips don't fit.
+            ViewThatFits(in: .horizontal) {
+                chips
+                ScrollView(.horizontal, showsIndicators: false) { chips }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(height: 24)
         .onChange(of: isFieldFocused) { _, focused in
             if !focused, model.notch.isEditingTopic { finishEditing() }
+        }
+    }
+
+    private var chips: some View {
+        HStack(spacing: 6) {
+            ForEach(model.topics.topics) { topic in
+                let isSelected = model.settings.currentTopicID == topic.id
+                Button(topic.name) {
+                    model.settings.currentTopicID = isSelected ? nil : topic.id
+                }
+                .buttonStyle(TopicChipStyle(tint: isSelected ? tint : nil))
+            }
+
+            if model.notch.isEditingTopic {
+                TextField("New topic", text: $draft)
+                    .textFieldStyle(.plain)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .focused($isFieldFocused)
+                    .frame(width: 120)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(Capsule().strokeBorder(tint.opacity(0.8), lineWidth: 1.2))
+                    .onSubmit(commit)
+                    .onExitCommand(perform: finishEditing)
+            } else {
+                Button {
+                    startEditing()
+                } label: {
+                    if model.topics.topics.isEmpty {
+                        Label("Add topic", systemImage: "plus")
+                    } else {
+                        Image(systemName: "plus")
+                    }
+                }
+                .buttonStyle(TopicChipStyle(tint: nil))
+                .help("Add topic")
+            }
         }
     }
 
