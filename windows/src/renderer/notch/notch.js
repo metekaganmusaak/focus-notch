@@ -3,21 +3,28 @@
   const { t, duration, clock, phaseColor, PHASE_TITLES, icon, escapeHTML } = window.FN;
 
   const WINDOW_HEIGHT = 300;
-  // A virtual notch: Windows PCs have none, so this pill stands in for it.
-  const NOTCH = { width: 200 };
+  // A virtual notch: PCs have no hardware notch, so the pet and countdown sit side by
+  // side with no gap. Widths of the collapsed pill per size setting, so it fits a busy taskbar.
+  const SIZES = {
+    small: { idle: 64, compact: 132 },
+    medium: { idle: 110, compact: 200 },
+    large: { idle: 180, compact: 300 },
+  };
+  /// The latest app state from the main process.
+  let model = null;
+  const size = () => SIZES[model?.settings.notchSize] ?? SIZES.medium;
   /// Set by the app: which screen edge the notch is on, the height of the bar it
   /// sits in (menu bar or taskbar), and its horizontal center inside the window.
   let place = { edge: 'top', band: 34, anchorX: 380 };
-  const WING = 78;
   const PHASE_ICONS = { focus: 'timer', shortBreak: 'clock', longBreak: 'clock' };
 
   /// Body size and corner radii per mode, as in NotchLayout.swift.
   function layout(mode) {
     switch (mode) {
-      case 'compact': return { w: NOTCH.width + WING * 2, h: place.band, top: 6, bottom: 12 };
-      case 'expanded': return { w: Math.max(NOTCH.width + 310, 500), h: place.band + 170, top: 14, bottom: 30 };
-      case 'alert': return { w: Math.max(NOTCH.width + 270, 470), h: place.band + 96, top: 14, bottom: 30 };
-      default: return { w: NOTCH.width, h: place.band, top: 6, bottom: 12 };
+      case 'compact': return { w: size().compact, h: place.band, top: 6, bottom: 12 };
+      case 'expanded': return { w: 510, h: place.band + 170, top: 14, bottom: 30 };
+      case 'alert': return { w: 470, h: place.band + 96, top: 14, bottom: 30 };
+      default: return { w: size().idle, h: place.band, top: 6, bottom: 12 };
     }
   }
   const isOpen = (mode) => mode === 'expanded' || mode === 'alert';
@@ -29,6 +36,7 @@
 
   function placeViews() {
     document.body.classList.toggle('bottom-edge', place.edge === 'bottom');
+    for (const name of Object.keys(SIZES)) document.body.classList.toggle(`size-${name}`, size() === SIZES[name]);
     document.body.style.setProperty('--notch-height', `${place.band}px`);
     for (const view of Object.values(views)) {
       view.style.width = `${layout(view.id).w}px`;
@@ -104,7 +112,6 @@
 
   // MARK: - Mode and hover
 
-  let model = null;
   let mode = 'idle';
   let hovering = false;
   let editingTopic = false;
@@ -301,18 +308,24 @@
     action.textContent = alert.action ?? '';
   }
 
-  function applyPlacement(next) {
-    if (!next || JSON.stringify(next) === JSON.stringify(place)) return;
-    const first = !model;
-    place = next;
+  let renderedSize = null;
+
+  function applyPlacement(next, first) {
+    const sizeChanged = renderedSize !== model.settings.notchSize;
+    if (!sizeChanged && (!next || JSON.stringify(next) === JSON.stringify(place))) return;
+    renderedSize = model.settings.notchSize;
+    if (next) place = next;
     placeViews();
-    if (first) Object.assign(current, layout(mode));
-    target = layout(mode);
-    draw();
+    if (first) {
+      Object.assign(current, layout(mode));
+      draw();
+    } else {
+      animateTo(layout(mode));
+    }
   }
 
-  function render() {
-    applyPlacement(model.placement);
+  function render(first = false) {
+    applyPlacement(model.placement, first);
     const engine = model.engine;
     const tint = phaseColor(model.settings.theme, engine.phase);
     document.body.style.setProperty('--tint', tint);
@@ -399,6 +412,6 @@
   });
   api.getState().then((initial) => {
     model = initial;
-    render();
+    render(true);
   });
 })();

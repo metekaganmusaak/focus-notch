@@ -22,6 +22,8 @@ const DEFAULT_SETTINGS = {
   language: '',
   /// Horizontal position of the notch as a fraction of the screen width, or null for the default.
   notchPosition: null,
+  /// How much bar space the collapsed notch takes: 'small', 'medium' or 'large'.
+  notchSize: 'medium',
 };
 
 function dayKey(date = new Date()) {

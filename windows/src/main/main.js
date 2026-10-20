@@ -409,7 +409,7 @@ function openSettings() {
     icon: path.join(ASSETS, 'icon.png'),
     autoHideMenuBar: true,
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#1f1f1f' : '#f3f3f3',
-    webPreferences: { preload: PRELOAD, contextIsolation: true, sandbox: true },
+    webPreferences: { preload: PRELOAD, contextIsolation: true, sandbox: true, backgroundThrottling: !snapshotMode },
   });
   settingsWindow.loadFile(path.join(RENDERER, 'settings', 'index.html'));
   settingsWindow.once('ready-to-show', () => settingsWindow.show());
@@ -493,13 +493,16 @@ async function runSnapshots() {
   fs.mkdirSync(directory, { recursive: true });
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const capture = async (window, name) => {
+    // A window in the background may not repaint; force a fresh frame before capturing.
+    window.show();
+    window.webContents.invalidate();
     await wait(1200);
     const image = await window.webContents.capturePage();
     fs.writeFileSync(path.join(directory, `${name}.png`), image.toPNG());
   };
 
   // Sample data so the statistics tab has something to show.
-  const topics = ['Matematik', 'İngilizce', 'Kodlama'].map((name) => store.addTopic(name));
+  const topics = ['Math', 'English', 'Coding'].map((name) => store.addTopic(name));
   for (const [topic, sessions] of [[0, 4], [1, 2], [2, 3]]) {
     for (let i = 0; i < sessions; i++) store.addFocus(25 * 60, true, topics[topic].id);
   }
@@ -536,6 +539,8 @@ app.whenReady().then(() => {
   store = new Store(app.getPath('userData'));
   const languageArgument = process.argv.find((argument) => argument.startsWith('--lang='));
   if (languageArgument) store.settings.language = languageArgument.slice('--lang='.length);
+  const sizeArgument = process.argv.find((argument) => argument.startsWith('--notch-size='));
+  if (sizeArgument) store.settings.notchSize = sizeArgument.slice('--notch-size='.length);
   loadLanguage();
 
   engine = new PomodoroEngine(store);

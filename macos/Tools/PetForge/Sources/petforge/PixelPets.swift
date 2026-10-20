@@ -478,7 +478,165 @@ let frog = PetSpec(
     eyeTop: 9
 )
 
-let pets = [cat, dog, bunny, fox, panda, frog]
+/// Side flippers or wings, drawn behind the body.
+func sideWings(_ color: RGB) -> (inout Canvas, Pose) -> Void {
+    { c, _ in
+        c.ellipse(8.6, 24.2, 1.9, 3.4, color)
+        c.ellipse(mx(8.6), 24.2, 1.9, 3.4, color)
+    }
+}
+
+/// A small beak or bill in the middle of the face, wider for ducks.
+func beak(_ color: RGB, wide: Bool) -> (inout Canvas, Pose) -> Void {
+    { c, pose in
+        let left = wide ? 14 : 15
+        c.rect(left, 17, mi(left), 17, color)
+        if pose.mouthOpen {
+            c.dots([(15, 18), (16, 18)], hex(0xFF6F8E))
+            c.rect(left, 19, mi(left), 19, color)
+        } else {
+            c.rect(15, 18, 16, 18, color)
+        }
+    }
+}
+
+let hamster = PetSpec(
+    name: "hamster",
+    palette: Palette(base: hex(0xF2B45A), shade: hex(0xD6923C), light: hex(0xFFF3DD), accent: hex(0xFFB3C1),
+                     outline: hex(0x6B4220), nose: hex(0xFF8FA6)),
+    pawColor: hex(0xFFD9D0),
+    ears: { c, pose in
+        let twitch = pose.earTwitch ? 0.6 : 0
+        c.ellipse(9.6, 8.8 + twitch, 2.5, 2.4, hex(0xF2B45A))
+        c.ellipse(mx(9.6), 8.8, 2.5, 2.4, hex(0xF2B45A))
+        c.ellipse(9.6, 8.9 + twitch, 1.2, 1.2, hex(0xFFB3C1))
+        c.ellipse(mx(9.6), 8.9, 1.2, 1.2, hex(0xFFB3C1))
+    },
+    headMarkings: { c, _ in
+        c.ellipse(10.0, 18.4, 3.4, 2.4, hex(0xFFF3DD))
+        c.ellipse(mx(10.0), 18.4, 3.4, 2.4, hex(0xFFF3DD))
+        c.ellipse(16, 19.0, 2.6, 1.8, hex(0xFFF3DD))
+        c.rect(15, 8, 16, 10, hex(0xFFF3DD))
+    },
+    bodyMarkings: { c, _ in
+        c.ellipse(16, 26, 4.4, 3.6, hex(0xFFF3DD))
+    }
+)
+
+let penguin = PetSpec(
+    name: "penguin",
+    palette: Palette(base: hex(0x3D4A6B), shade: hex(0x2C3652), light: hex(0xF7F7FA), accent: hex(0xFF9DB2),
+                     outline: hex(0x1A2033), nose: hex(0xFFA53D)),
+    pawColor: hex(0xFFA53D),
+    armColor: hex(0x3D4A6B),
+    headMarkings: { c, _ in
+        c.ellipse(12.4, 16.0, 3.7, 4.2, hex(0xF7F7FA))
+        c.ellipse(mx(12.4), 16.0, 3.7, 4.2, hex(0xF7F7FA))
+        c.ellipse(16, 18.6, 5.6, 3.0, hex(0xF7F7FA))
+    },
+    tail: sideWings(hex(0x3D4A6B)),
+    bodyMarkings: { c, _ in
+        c.ellipse(16, 26, 4.8, 4.4, hex(0xF7F7FA))
+    },
+    mouth: beak(hex(0xFFA53D), wide: false)
+)
+
+let owl = PetSpec(
+    name: "owl",
+    palette: Palette(base: hex(0xB9824F), shade: hex(0x94643A), light: hex(0xF1DDBD), accent: hex(0xFF9DB2),
+                     outline: hex(0x4E3016), nose: hex(0xF0A23C)),
+    pawColor: hex(0xF0A23C),
+    armColor: hex(0xB9824F),
+    ears: { c, pose in
+        let twitch = pose.earTwitch ? 1.0 : 0
+        c.triangle((7.2, 11), (11.8, 8.6), (7.6 - twitch, 4.6 + twitch), hex(0xB9824F))
+        c.triangle((mx(7.2), 11), (mx(11.8), 8.6), (mx(7.6), 4.6), hex(0xB9824F))
+    },
+    headMarkings: { c, _ in
+        c.ellipse(11.8, 15.6, 3.6, 3.4, hex(0xF1DDBD))
+        c.ellipse(mx(11.8), 15.6, 3.6, 3.4, hex(0xF1DDBD))
+        c.dots([(13, 10), (16, 9), (19, 10)], hex(0x94643A))
+    },
+    tail: sideWings(hex(0x94643A)),
+    bodyMarkings: { c, _ in
+        c.ellipse(16, 26, 4.2, 3.8, hex(0xF1DDBD))
+        c.dots([(14, 25), (17, 24), (15, 27), (18, 27)], hex(0xD0B48C))
+    },
+    mouth: beak(hex(0xF0A23C), wide: false)
+)
+
+let koala = PetSpec(
+    name: "koala",
+    palette: Palette(base: hex(0xA7ACB8), shade: hex(0x868B98), light: hex(0xEDEFF3), accent: hex(0xFF9DB2),
+                     outline: hex(0x454956), nose: hex(0x34373F)),
+    pawColor: hex(0x868B98),
+    ears: { c, pose in
+        let twitch = pose.earTwitch ? 0.8 : 0
+        c.ellipse(7.2, 10.0 + twitch, 3.7, 3.5, hex(0xA7ACB8))
+        c.ellipse(mx(7.2), 10.0, 3.7, 3.5, hex(0xA7ACB8))
+        c.ellipse(7.6, 10.4 + twitch, 2.1, 2.0, hex(0xEDEFF3))
+        c.ellipse(mx(7.6), 10.4, 2.1, 2.0, hex(0xEDEFF3))
+    },
+    bodyMarkings: { c, _ in
+        c.ellipse(16, 26, 4.0, 3.6, hex(0xEDEFF3))
+    },
+    mouth: { c, pose in
+        let nose = hex(0x34373F)
+        c.rect(15, 16, 16, 18, nose)
+        c.dots([(14, 17), (17, 17)], nose)
+        c.dots([(15, 16)], hex(0x6A6E7A))
+        if pose.mouthOpen { c.dots([(15, 19), (16, 19)], hex(0xFF6F8E)) }
+    }
+)
+
+let duck = PetSpec(
+    name: "duck",
+    palette: Palette(base: hex(0xFFD84A), shade: hex(0xE9B92A), light: hex(0xFFF2A6), accent: hex(0xFF9DB2),
+                     outline: hex(0x8A5A12), nose: hex(0xFF9F2E)),
+    pawColor: hex(0xFF9F2E),
+    armColor: hex(0xFFD84A),
+    ears: { c, pose in
+        let sway = pose.earTwitch ? 1.0 : 0
+        c.stroke([(16, 8.5), (16.6 + sway, 5.8), (18.2 + sway, 5.0)], radius: 1.0, hex(0xFFD84A))
+    },
+    tail: sideWings(hex(0xE9B92A)),
+    bodyMarkings: { c, _ in
+        c.ellipse(16, 26, 4.0, 3.4, hex(0xFFF2A6))
+    },
+    mouth: beak(hex(0xFF9F2E), wide: true)
+)
+
+let hedgehog = PetSpec(
+    name: "hedgehog",
+    palette: Palette(base: hex(0x9C6B45), shade: hex(0x7C5233), light: hex(0xF6E1C3), accent: hex(0xFF9DB2),
+                     outline: hex(0x4A2E18), nose: hex(0x2A1E18)),
+    pawColor: hex(0xF6E1C3),
+    ears: { c, pose in
+        // Spines fanning out around the top of the head.
+        let lift = pose.earTwitch ? 0.6 : 0
+        for step in 0..<10 {
+            let angle = (178 + Double(step) * 20.4) * .pi / 180
+            let tip: Point = (16 + cos(angle) * 13.4, 15 + sin(angle) * (11.6 + lift))
+            let left = angle - 0.2, right = angle + 0.2
+            let base = (left: (16 + cos(left) * 8.8, 15 + sin(left) * 6.9), right: (16 + cos(right) * 8.8, 15 + sin(right) * 6.9))
+            c.triangle(base.left, base.right, tip, hex(0x9C6B45))
+            // Darker tips make the spines read as spines rather than fur.
+            let mid = (left: (base.left.0 * 0.4 + tip.x * 0.6, base.left.1 * 0.4 + tip.y * 0.6),
+                       right: (base.right.0 * 0.4 + tip.x * 0.6, base.right.1 * 0.4 + tip.y * 0.6))
+            c.triangle(mid.left, mid.right, tip, hex(0x6A4428))
+        }
+    },
+    headMarkings: { c, _ in
+        c.ellipse(16, 17.2, 6.6, 4.6, hex(0xF6E1C3))
+        c.ellipse(10.2, 12.0, 1.5, 1.5, hex(0xF6E1C3))
+        c.ellipse(mx(10.2), 12.0, 1.5, 1.5, hex(0xF6E1C3))
+    },
+    bodyMarkings: { c, _ in
+        c.ellipse(16, 26, 4.0, 3.6, hex(0xF6E1C3))
+    }
+)
+
+let pets = [cat, dog, bunny, fox, panda, frog, hamster, penguin, owl, koala, duck, hedgehog]
 
 // MARK: - Animations
 

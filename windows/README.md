@@ -1,13 +1,15 @@
-# Focus Notch — Windows
+# Focus Notch for Windows
 
-macOS sürümünün Electron ile yazılmış Windows karşılığı. PC'lerde donanım çentiği olmadığı için sanal çentik **görev çubuğunun içinde** durur ve üzerine gelince yukarı doğru büyür. Özellikler Mac sürümüyle aynıdır: Pomodoro döngüsü, 5 dk hatırlatma, animasyonlu pet'ler ve sesleri, konular ve istatistikler, temalar ve 23 dil.
+The Windows version of Focus Notch, built with Electron. PCs have no hardware notch, so the virtual notch sits **inside the taskbar** and grows upward when you hover over it. It has the same features as the macOS app: the Pomodoro cycle, the 5-minute reminder, animated pets and their sounds, topics and statistics, themes and 23 languages.
 
-## Gereksinimler
+See the [main README](../README.md) for screenshots and how to use the app.
 
-- Windows 10 veya 11 (geliştirme macOS ve Linux'ta da çalışır)
-- Node.js 20 veya üstü
+## Requirements
 
-## Çalıştırma
+- Windows 10 or 11 (development also works on macOS and Linux)
+- Node.js 20 or later
+
+## Running
 
 ```sh
 cd windows
@@ -15,28 +17,39 @@ npm install
 npm start
 ```
 
-`npm start` önce `npm run sync` çalıştırır. Bu adım pet GIF'lerini, sesleri ve ikonu `../macos/FocusNotch/Resources` klasöründen kopyalar, `Localizable.xcstrings` dosyasını da `assets/locales/*.json` dosyalarına çevirir. Böylece iki uygulama aynı içerik ve çevirileri paylaşır.
+`npm start` runs `npm run sync` first. It copies the pet GIFs, sounds and icon from `../macos/FocusNotch/Resources` and converts `Localizable.xcstrings` into `assets/locales/*.json`, so both apps share the same content and translations.
 
-Uygulama görev çubuğunda görünmez. Bildirim alanındaki (tray) simgeye tıklayınca ayarlar açılır, sağ tıklayınca kontrol menüsü gelir.
+The app doesn't show up in the taskbar's app list. Click its icon in the notification area to open settings, or right-click it for the control menu.
 
-## Kurulum dosyası
+## Building the installer
 
 ```sh
 npm run dist
 ```
 
-`dist/` klasörüne x64 ve ARM64 için bir NSIS kurulum dosyası (`Focus Notch Setup *.exe`) üretir. Bu komutu Windows'ta çalıştırın.
+This writes an NSIS installer (`Focus Notch Setup *.exe`) to `dist/`. It works on macOS too:
 
-## Sanal çentik nasıl çalışır
+```sh
+npx electron-builder --win nsis portable --x64
+```
 
-- **Yer:** Windows 11'de simgeler ortadaysa onları kapatmamak için sol tarafta, simgeler soldaysa veya Windows 10'da ortada durur. Paneli açıp alt şeridinden tutarak sağa sola sürükleyebilirsin; konum hatırlanır. Görev çubuğu üstteyse çentik de üstten aşağı doğru açılır.
-- **Sabit pencere:** Görev çubuğunun üstünde 760×300 boyutunda, şeffaf ve her zaman üstte duran bir pencere var. Pencere hiç taşınmaz ve boyutu değişmez. Siyah çentik şekli bu pencerenin içinde yay fiziğiyle animasyonlu bir SVG; içerik de aynı yola kırpılır. Bu sayede büyüme ve küçülme sırasında kayma ya da taşma olmaz.
-- **Tıklamalar:** Şeffaf alanlara yapılan tıklamalar alttaki pencerelere geçer. Fare çentiğin üzerine gelince panel tıklanabilir hale gelir, uzaklaşınca yeniden geçirgen olur.
-- **Görünümler:** Boştayken küçük bir hap gibi durur. Oturum sürerken iki yanında pet ve sayaç görünür. Üzerine gelince tam panel açılır.
+This builds both the installer and a portable exe.
 
-## Geliştirme
+## How the virtual notch works
 
-- `npm run snapshot -- --taskbar`: Görev çubuğu yerleşimini Mac veya Linux'ta da önizler.
-- `npm run snapshot`: Tüm görünümleri `snapshots/` klasörüne PNG olarak kaydeder. Geçici bir profil kullanır; dil seçmek için `npm run snapshot -- --lang=tr`.
-- VS Code terminalinde Electron düz Node gibi açılıyorsa `ELECTRON_RUN_AS_NODE` değişkenini kaldırın.
-- Kod yapısı için depo kökündeki `CLAUDE.md` dosyasına bakın.
+- **Placement:** It stands in the taskbar and opens upward; if the taskbar is at the top of the screen it hangs down instead. When Windows 11 centers the taskbar icons, it starts on the left so it doesn't cover them; otherwise it starts in the center.
+- **Position and size:** Change them in **Settings → General**:
+  - **Notch position:** Left, Center or Right, plus a slider for fine-tuning.
+  - **Notch size:** Small, Medium or Large.
+  - You can also drag the open panel by its status strip. The position is remembered.
+- **A window that never moves:** The notch lives in a transparent, always-on-top 760×300 window above the taskbar. The window itself never moves or resizes. The black shape is a spring-animated SVG inside it, and the content is clipped to the same path, so growing and shrinking never jitters or overflows.
+- **Click-through:** Clicks on the transparent area go to whatever is underneath. The panel only captures the mouse while you're hovering over it. Because clicking the taskbar can raise it above other topmost windows, the notch puts itself back on top every 1.5 seconds.
+
+## Development
+
+- `npm run snapshot` saves every view to `snapshots/` as PNG files, using a throwaway profile. Add options after `--`:
+  - `--lang=de` for a language.
+  - `--taskbar` to preview the taskbar placement on macOS or Linux.
+  - `--notch-size=small` for a notch size.
+- If Electron starts as plain Node in a VS Code terminal, unset `ELECTRON_RUN_AS_NODE`.
+- See `CLAUDE.md` at the repository root for the code structure.

@@ -66,18 +66,15 @@ final class PetStore {
 
     static let defaultPetID = "cat"
 
-    /// The bundled pets. IDs are shared between styles so a choice survives a style
-    /// switch; the pixel style only has the first six animals.
+    /// The bundled pets. IDs are shared between styles so a choice survives a style switch.
     static func builtIn(style: PetStyle) -> [Pet] {
-        let pixel = [
+        let animals = [
             ("cat", String(localized: "Cat")),
             ("dog", String(localized: "Dog")),
             ("bunny", String(localized: "Bunny")),
             ("fox", String(localized: "Fox")),
             ("panda", String(localized: "Panda")),
             ("frog", String(localized: "Frog")),
-        ]
-        let cuteOnly = [
             ("hamster", String(localized: "Hamster")),
             ("penguin", String(localized: "Penguin")),
             ("owl", String(localized: "Owl")),
@@ -85,7 +82,7 @@ final class PetStore {
             ("duck", String(localized: "Duck")),
             ("hedgehog", String(localized: "Hedgehog")),
         ]
-        return (style == .pixel ? pixel : pixel + cuteOnly).map { id, name in
+        return animals.map { id, name in
             Pet(
                 id: id, name: name,
                 source: .builtIn(style == .pixel ? id : "cute_\(id)"),

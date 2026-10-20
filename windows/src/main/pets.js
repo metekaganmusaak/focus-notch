@@ -5,8 +5,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
 const MOODS = ['idle', 'focus', 'rest', 'celebrate'];
-const PIXEL_PETS = ['cat', 'dog', 'bunny', 'fox', 'panda', 'frog'];
-const CUTE_ONLY_PETS = ['hamster', 'penguin', 'owl', 'koala', 'duck', 'hedgehog'];
+const ANIMALS = ['cat', 'dog', 'bunny', 'fox', 'panda', 'frog', 'hamster', 'penguin', 'owl', 'koala', 'duck', 'hedgehog'];
 const NAMES = {
   cat: 'Cat', dog: 'Dog', bunny: 'Bunny', fox: 'Fox', panda: 'Panda', frog: 'Frog',
   hamster: 'Hamster', penguin: 'Penguin', owl: 'Owl', koala: 'Koala', duck: 'Duck', hedgehog: 'Hedgehog',
@@ -14,11 +13,9 @@ const NAMES = {
 
 const fileURL = (file) => pathToFileURL(file).href;
 
-/// The pets for a style. IDs are shared between styles so a choice survives a style
-/// switch; the pixel style only has the first six animals.
+/// The pets for a style. IDs are shared between styles so a choice survives a style switch.
 function listPets({ style, assets, customDirectory, customPets, t }) {
-  const ids = style === 'pixel' ? PIXEL_PETS : [...PIXEL_PETS, ...CUTE_ONLY_PETS];
-  const builtIn = ids.map((id) => {
+  const builtIn = ANIMALS.map((id) => {
     const base = style === 'pixel' ? id : `cute_${id}`;
     const sound = path.join(assets, 'sounds', `pet_${id}.wav`);
     return {

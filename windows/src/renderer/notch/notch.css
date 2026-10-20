@@ -94,6 +94,10 @@ body.open #shape { filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45)); }
 #compact .wing { display: flex; align-items: center; gap: 6px; }
 #compact .pet, #compact .phase-icon { width: 26px; height: 26px; }
 #compact .compact-time { font-size: 14px; color: var(--tint); }
+body.size-small #compact { padding: 0 10px; }
+body.size-small #compact .pet, body.size-small #compact .phase-icon { width: 20px; height: 20px; }
+body.size-small #compact .compact-time { font-size: 12px; }
+body.size-small #compact .mini-status { display: none; }
 #compact .mini-status { color: var(--tint); display: grid; place-items: center; }
 #compact.idle-state .wing.trailing { opacity: 0.7; }
 

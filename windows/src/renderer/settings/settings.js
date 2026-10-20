@@ -12,6 +12,7 @@
   const REMINDER_CHOICES = [1, 2, 3, 5, 10, 15];
   /// Notch position presets, as fractions of the screen width.
   const POSITIONS = [['Left', 0.22], ['Center', 0.5], ['Right', 0.78]];
+  const NOTCH_SIZES = [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']];
   const PERIODS = [['today', 'Today'], ['week', 'This Week'], ['allTime', 'All Time']];
 
   let model = null;
@@ -201,7 +202,11 @@
         <input type="range" min="12" max="88" step="1" value="${percent}" data-setting="notchPosition" data-scale="0.01" aria-label="${h(t('Notch position'))}">
         <span>${h(t('Right'))}</span>
       </div></div>`,
-    ], t('You can also move it by dragging the open notch.'));
+    ], t('You can also move it by dragging the open notch.'))
+      + group(t('Notch size'), [
+        `<div class="row"><div class="segmented" style="flex:1">${NOTCH_SIZES.map(([value, title]) =>
+          `<button data-notch-size="${value}" aria-pressed="${model.settings.notchSize === value}">${h(t(title))}</button>`).join('')}</div></div>`,
+      ]);
   }
 
   const PANES = { timer: timerPane, pets: petsPane, statistics: statisticsPane, notifications: notificationsPane, general: generalPane };
@@ -284,6 +289,8 @@
     if (pet) return api.setSetting('selectedPetID', pet.dataset.pet);
     const style = target.closest('[data-style]');
     if (style) return api.setSetting('petStyle', style.dataset.style);
+    const notchSize = target.closest('[data-notch-size]');
+    if (notchSize) return api.setSetting('notchSize', notchSize.dataset.notchSize);
     const position = target.closest('[data-position]');
     if (position) return api.setSetting('notchPosition', Number(position.dataset.position));
     const theme = target.closest('[data-theme]');
