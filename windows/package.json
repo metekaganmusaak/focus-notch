@@ -1,7 +1,7 @@
 {
   "name": "focus-notch",
   "productName": "Focus Notch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A Pomodoro timer with cute pets that lives in a virtual notch at the top of your screen.",
   "main": "src/main/main.js",
   "private": true,
