@@ -1,4 +1,4 @@
-// Bundled pets (same art as the macOS app) plus GIFs the user added.
+// Bundled pets (same art as the macOS app) plus pets the user added, one GIF per mood.
 const { randomUUID } = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -27,39 +27,41 @@ function listPets({ style, assets, customDirectory, customPets, t }) {
       sound: fs.existsSync(sound) ? fileURL(sound) : null,
     };
   });
-  const custom = customPets.map((pet) => {
-    const url = fileURL(path.join(customDirectory, pet.fileName));
-    return {
-      id: pet.id,
-      name: pet.name,
-      isCustom: true,
-      pixel: false,
-      urls: Object.fromEntries(MOODS.map((mood) => [mood, url])),
-      sound: null,
-    };
-  });
+  // Pets added before per-mood images have one `fileName` for every mood.
+  const custom = customPets.map((pet) => ({
+    id: pet.id,
+    name: pet.name,
+    isCustom: true,
+    pixel: false,
+    urls: Object.fromEntries(MOODS.map((mood) => [mood, fileURL(path.join(customDirectory, pet.moodFiles?.[mood] ?? pet.fileName))])),
+    sound: null,
+  }));
   return [...builtIn, ...custom];
 }
 
-/// Copies a GIF into the user data folder. Returns the new record, or null if it isn't a GIF.
-function importGIF(file, customDirectory) {
-  const header = Buffer.alloc(6);
-  const handle = fs.openSync(file, 'r');
-  try {
-    fs.readSync(handle, header, 0, 6, 0);
-  } finally {
-    fs.closeSync(handle);
-  }
-  if (!header.toString('ascii').startsWith('GIF8')) return null;
+const MAX_GIF_BYTES = 50 * 1024 * 1024;
+
+/// Saves the GIFs the settings window made (mood → bytes) into the user data folder.
+/// Returns the new record, or null if any of them isn't a GIF.
+function addPet(name, gifs, customDirectory) {
+  const entries = MOODS.map((mood) => [mood, gifs?.[mood]]);
+  const valid = entries.every(([, bytes]) => bytes instanceof Uint8Array && bytes.length > 6 && bytes.length < MAX_GIF_BYTES
+    && Buffer.from(bytes.subarray(0, 4)).toString('ascii') === 'GIF8');
+  if (!valid) return null;
   const id = `custom-${randomUUID()}`;
-  const fileName = `${id}.gif`;
   fs.mkdirSync(customDirectory, { recursive: true });
-  fs.copyFileSync(file, path.join(customDirectory, fileName));
-  return { id, name: path.basename(file, path.extname(file)).slice(0, 40), fileName };
+  const moodFiles = {};
+  for (const [mood, bytes] of entries) {
+    moodFiles[mood] = `${id}_${mood}.gif`;
+    fs.writeFileSync(path.join(customDirectory, moodFiles[mood]), bytes);
+  }
+  return { id, name: String(name ?? '').trim().slice(0, 40) || 'Pet', moodFiles };
 }
 
 function removeCustomPet(record, customDirectory) {
-  fs.rmSync(path.join(customDirectory, record.fileName), { force: true });
+  for (const fileName of [record.fileName, ...Object.values(record.moodFiles ?? {})].filter(Boolean)) {
+    fs.rmSync(path.join(customDirectory, fileName), { force: true });
+  }
 }
 
-module.exports = { listPets, importGIF, removeCustomPet };
+module.exports = { listPets, addPet, removeCustomPet };

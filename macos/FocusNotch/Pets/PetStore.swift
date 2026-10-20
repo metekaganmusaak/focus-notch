@@ -1,8 +1,7 @@
 import Foundation
-import ImageIO
 import Observation
 
-enum PetMood: String {
+enum PetMood: String, CaseIterable {
     case idle, focus, rest, celebrate
 }
 
@@ -25,8 +24,8 @@ struct Pet: Identifiable, Hashable {
     enum Source: Hashable {
         /// Bundled pet with one GIF per mood: `<name>_<mood>.gif`.
         case builtIn(String)
-        /// A GIF the user added; used for every mood.
-        case custom(URL)
+        /// GIFs the user added, one per mood (older custom pets have one for every mood).
+        case custom([PetMood: URL])
     }
 
     let id: String
@@ -46,14 +45,10 @@ struct Pet: Identifiable, Hashable {
         switch source {
         case .builtIn(let name):
             Bundle.main.url(forResource: "\(name)_\(mood.rawValue)", withExtension: "gif")
-        case .custom(let url):
-            url
+        case .custom(let urls):
+            urls[mood] ?? urls[.idle]
         }
     }
-}
-
-enum PetImportError: Error {
-    case unreadableImage
 }
 
 @Observable
@@ -61,7 +56,12 @@ final class PetStore {
     private struct CustomRecord: Codable {
         let id: String
         var name: String
-        let fileName: String
+        /// Pets added before per-mood images use this one GIF for every mood.
+        var fileName: String?
+        /// Mood raw value → file name.
+        var moodFiles: [String: String]?
+
+        var fileNames: [String] { (fileName.map { [$0] } ?? []) + (moodFiles.map { Array($0.values) } ?? []) }
     }
 
     static let defaultPetID = "cat"
@@ -113,22 +113,18 @@ final class PetStore {
         all(style: style).first { $0.id == id }
     }
 
-    /// Copies a GIF into Application Support and registers it as a pet.
-    func importGIF(from source: URL) throws -> Pet {
-        let scoped = source.startAccessingSecurityScopedResource()
-        defer { if scoped { source.stopAccessingSecurityScopedResource() } }
-
-        guard let image = CGImageSourceCreateWithURL(source as CFURL, nil),
-              CGImageSourceGetCount(image) > 0 else {
-            throw PetImportError.unreadableImage
+    /// Saves one GIF per mood (see `PetGIFMaker`) into Application Support and registers them as a pet.
+    func addPet(name: String, gifs: [PetMood: Data]) throws -> Pet {
+        let id = "custom-\(UUID().uuidString)"
+        try FileManager.default.createDirectory(at: Self.directory, withIntermediateDirectories: true)
+        var files: [String: String] = [:]
+        for (mood, data) in gifs {
+            let fileName = "\(id)_\(mood.rawValue).gif"
+            try data.write(to: Self.directory.appendingPathComponent(fileName))
+            files[mood.rawValue] = fileName
         }
 
-        let id = "custom-\(UUID().uuidString)"
-        let fileName = "\(id).gif"
-        try FileManager.default.createDirectory(at: Self.directory, withIntermediateDirectories: true)
-        try FileManager.default.copyItem(at: source, to: Self.directory.appendingPathComponent(fileName))
-
-        records.append(CustomRecord(id: id, name: source.deletingPathExtension().lastPathComponent, fileName: fileName))
+        records.append(CustomRecord(id: id, name: name, moodFiles: files))
         save()
         rebuild()
         return customPets.last!
@@ -137,14 +133,22 @@ final class PetStore {
     func remove(_ pet: Pet) {
         guard let index = records.firstIndex(where: { $0.id == pet.id }) else { return }
         let record = records.remove(at: index)
-        try? FileManager.default.removeItem(at: Self.directory.appendingPathComponent(record.fileName))
+        for fileName in record.fileNames {
+            try? FileManager.default.removeItem(at: Self.directory.appendingPathComponent(fileName))
+        }
         save()
         rebuild()
     }
 
     private func rebuild() {
-        customPets = records.map {
-            Pet(id: $0.id, name: $0.name, source: .custom(Self.directory.appendingPathComponent($0.fileName)))
+        customPets = records.map { record in
+            var urls: [PetMood: URL] = [:]
+            for mood in PetMood.allCases {
+                if let fileName = record.moodFiles?[mood.rawValue] ?? record.fileName {
+                    urls[mood] = Self.directory.appendingPathComponent(fileName)
+                }
+            }
+            return Pet(id: record.id, name: record.name, source: .custom(urls))
         }
     }
 

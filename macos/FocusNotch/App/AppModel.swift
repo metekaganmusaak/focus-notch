@@ -40,7 +40,7 @@ final class AppModel {
 
     var notchMode: NotchMode {
         if notch.alert != nil { return .alert }
-        if notch.isHovering || notch.isEditingTopic { return .expanded }
+        if notch.isHovering || notch.isEditingTopic || notch.isPeeking { return .expanded }
         if engine.isSessionActive { return .compact }
         return notch.metrics.hasNotch ? .idle : .hidden
     }

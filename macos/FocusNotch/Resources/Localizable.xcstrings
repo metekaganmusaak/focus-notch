@@ -275,139 +275,139 @@
         }
       }
     },
-    "Add GIF…" : {
-      "comment" : "Button card in the pet grid to import a custom animated GIF file.",
+    "Add Pet…" : {
+      "comment" : "Button card in the pet grid that opens the sheet for adding a custom pet from images.",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIF Ekle…"
+            "value" : "Evcil Hayvan Ekle…"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "添加 GIF…"
+            "value" : "添加宠物…"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入 GIF…"
+            "value" : "加入寵物…"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIF जोड़ें…"
+            "value" : "पालतू जोड़ें…"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Añadir GIF…"
+            "value" : "Añadir mascota…"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajouter un GIF…"
+            "value" : "Ajouter un compagnon…"
           }
         },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إضافة GIF…"
+            "value" : "إضافة حيوان أليف…"
           }
         },
         "bn" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIF যোগ করুন…"
+            "value" : "পোষা প্রাণী যোগ করুন…"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Adicionar GIF…"
+            "value" : "Adicionar pet…"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добавить GIF…"
+            "value" : "Добавить питомца…"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIF شامل کریں…"
+            "value" : "پالتو شامل کریں…"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tambahkan GIF…"
+            "value" : "Tambah Peliharaan…"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIF hinzufügen …"
+            "value" : "Haustier hinzufügen …"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIFを追加…"
+            "value" : "ペットを追加…"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "GIF 추가…"
+            "value" : "펫 추가…"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm GIF…"
+            "value" : "Thêm thú cưng…"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi GIF…"
+            "value" : "Aggiungi animale…"
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "افزودن GIF…"
+            "value" : "افزودن حیوان خانگی…"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dodaj GIF…"
+            "value" : "Dodaj zwierzaka…"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додати GIF…"
+            "value" : "Додати улюбленця…"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "เพิ่ม GIF…"
+            "value" : "เพิ่มสัตว์เลี้ยง…"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voeg GIF toe…"
+            "value" : "Huisdier toevoegen…"
           }
         }
       }
@@ -549,139 +549,139 @@
         }
       }
     },
-    "Add your own pet: drop an animated GIF here or click +." : {
-      "comment" : "Hint under the pet grid in settings.",
+    "Add your own pet: drop up to four images here or click +." : {
+      "comment" : "Hint under the pet grid.",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kendi evcil hayvanını ekle: buraya hareketli bir GIF bırak ya da + simgesine tıkla."
+            "value" : "Kendi evcil hayvanını ekle: buraya en fazla dört görsel bırak ya da + simgesine tıkla."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "添加你自己的宠物：将动态 GIF 拖到此处，或点按“+”。"
+            "value" : "添加你自己的宠物：将最多四张图片拖到这里，或点按 +。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "加入你自己的寵物：將動態 GIF 拖移到這裡，或按一下「+」。"
+            "value" : "加入你自己的寵物：將最多四張圖片拖到這裡，或點按 +。"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अपना पालतू जोड़ें: यहाँ कोई ऐनिमेटेड GIF ड्रॉप करें या + पर क्लिक करें।"
+            "value" : "अपना पालतू जोड़ें: यहाँ अधिकतम चार चित्र छोड़ें या + पर क्लिक करें।"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Añade tu propia mascota: suelta aquí un GIF animado o haz clic en +."
+            "value" : "Añade tu propia mascota: suelta hasta cuatro imágenes aquí o haz clic en +."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajoute ton propre animal : dépose un GIF animé ici ou clique sur +."
+            "value" : "Ajoutez votre propre compagnon : déposez jusqu’à quatre images ici ou cliquez sur +."
           }
         },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "أضِف حيوانك الأليف الخاص: اسحب صورة GIF متحركة وأفلِتها هنا أو انقر على +."
+            "value" : "أضف حيوانك الأليف الخاص: اسحب ما يصل إلى أربع صور هنا أو انقر على +."
           }
         },
         "bn" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "নিজের পোষা প্রাণী যোগ করুন: এখানে একটি অ্যানিমেটেড GIF ছেড়ে দিন অথবা + চিহ্নে ক্লিক করুন।"
+            "value" : "নিজের পোষা প্রাণী যোগ করুন: এখানে সর্বোচ্চ চারটি ছবি ছাড়ুন বা + এ ক্লিক করুন।"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Adicione seu próprio bichinho: solte um GIF animado aqui ou clique em +."
+            "value" : "Adicione seu próprio pet: solte até quatro imagens aqui ou clique em +."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добавь своего питомца: перетащи сюда анимированный GIF или нажми +."
+            "value" : "Добавьте своего питомца: перетащите сюда до четырёх изображений или нажмите +."
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اپنا پالتو جانور شامل کریں: یہاں کوئی متحرک GIF چھوڑیں یا + پر کلک کریں۔"
+            "value" : "اپنا پالتو شامل کریں: یہاں زیادہ سے زیادہ چار تصاویر چھوڑیں یا + پر کلک کریں۔"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tambahkan peliharaanmu sendiri: seret GIF animasi ke sini atau klik +."
+            "value" : "Tambahkan peliharaanmu sendiri: letakkan hingga empat gambar di sini atau klik +."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Füge dein eigenes Haustier hinzu: Zieh ein animiertes GIF hierher oder klicke auf +."
+            "value" : "Füge dein eigenes Haustier hinzu: Zieh bis zu vier Bilder hierher oder klicke auf +."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "自分だけのペットを追加：アニメーションGIFをここにドロップするか、「+」をクリックしてください。"
+            "value" : "自分のペットを追加：最大4枚の画像をここにドロップするか、+ をクリックします。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "나만의 펫 추가: 움직이는 GIF를 여기에 끌어다 놓거나 + 버튼을 클릭하세요."
+            "value" : "나만의 펫 추가: 이미지를 최대 4장까지 여기에 놓거나 +를 클릭하세요."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm thú cưng của riêng bạn: kéo ảnh GIF động vào đây hoặc bấm +."
+            "value" : "Thêm thú cưng của riêng bạn: thả tối đa bốn hình ảnh vào đây hoặc nhấp vào +."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi il tuo animaletto: trascina qui una GIF animata o fai clic su +."
+            "value" : "Aggiungi il tuo animale: trascina qui fino a quattro immagini o fai clic su +."
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "حیوان خانگی خودتان را اضافه کنید: یک GIF متحرک را اینجا رها کنید یا روی + کلیک کنید."
+            "value" : "حیوان خانگی خودتان را اضافه کنید: حداکثر چهار تصویر را اینجا رها کنید یا روی + کلیک کنید."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dodaj własnego zwierzaka: upuść tutaj animowany GIF lub kliknij +."
+            "value" : "Dodaj własnego zwierzaka: upuść tu maksymalnie cztery obrazy lub kliknij +."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додай свого улюбленця: перетягни сюди анімований GIF або натисни +."
+            "value" : "Додайте власного улюбленця: перетягніть сюди до чотирьох зображень або натисніть +."
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "เพิ่มสัตว์เลี้ยงของคุณเอง: ลาก GIF แบบเคลื่อนไหวมาวางที่นี่ หรือคลิก +"
+            "value" : "เพิ่มสัตว์เลี้ยงของคุณเอง: วางรูปภาพได้สูงสุดสี่รูปที่นี่หรือคลิก +"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voeg je eigen huisdier toe: sleep hier een geanimeerde GIF naartoe of klik op +."
+            "value" : "Voeg je eigen huisdier toe: sleep hier maximaal vier afbeeldingen naartoe of klik op +."
           }
         }
       }
@@ -1234,6 +1234,143 @@
         }
       }
     },
+    "Cancel" : {
+      "comment" : "Button that closes a sheet without saving.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vazgeç"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रद्द करें"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إلغاء"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ کریں"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batal"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hủy"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لغو"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасувати"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuleren"
+          }
+        }
+      }
+    },
     "Cat" : {
       "comment" : "Pet name.",
       "localizations" : {
@@ -1367,6 +1504,143 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kat"
+          }
+        }
+      }
+    },
+    "Celebrating" : {
+      "comment" : "Mood of a custom pet: shown when a session is finished or the pet is clicked. Short label under an image slot.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kutlarken"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "庆祝中"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "慶祝中"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जश्न मनाते हुए"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Celebrando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En fête"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يحتفل"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "উদযাপন করছে"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comemorando"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Празднует"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جشن مناتے ہوئے"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merayakan"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feiert"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お祝い中"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "축하 중"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang ăn mừng"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Festeggia"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "در حال جشن"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Świętuje"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Святкує"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "กำลังฉลอง"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vieren"
           }
         }
       }
@@ -1646,139 +1920,139 @@
         }
       }
     },
-    "Choose an animated GIF for your focus friend" : {
-      "comment" : "Message in the file-open dialog.",
+    "Choose an image for this mood" : {
+      "comment" : "Message in the file picker for one mood of a custom pet.",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odak dostun için hareketli bir GIF seç"
+            "value" : "Bu ruh hali için bir görsel seç"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "为你的专注伙伴选择一个动态 GIF"
+            "value" : "为此状态选择一张图片"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "為你的專注夥伴選擇動態 GIF"
+            "value" : "為此狀態選擇一張圖片"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अपने फ़ोकस साथी के लिए कोई ऐनिमेटेड GIF चुनें"
+            "value" : "इस मूड के लिए एक चित्र चुनें"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elige un GIF animado para tu compañero"
+            "value" : "Elige una imagen para este estado"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choisis un GIF animé pour ton compagnon"
+            "value" : "Choisissez une image pour cette humeur"
           }
         },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اختر صورة GIF متحركة لرفيق تركيزك"
+            "value" : "اختر صورة لهذه الحالة"
           }
         },
         "bn" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "আপনার ফোকাস সঙ্গীর জন্য একটি অ্যানিমেটেড GIF বেছে নিন"
+            "value" : "এই মেজাজের জন্য একটি ছবি বেছে নিন"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Escolha um GIF animado para o seu amigo do foco"
+            "value" : "Escolha uma imagem para este humor"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Выбери анимированный GIF для своего питомца"
+            "value" : "Выберите изображение для этого состояния"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اپنے فوکس ساتھی کے لیے کوئی متحرک GIF منتخب کریں"
+            "value" : "اس موڈ کے لیے ایک تصویر منتخب کریں"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pilih GIF animasi untuk teman fokusmu"
+            "value" : "Pilih gambar untuk suasana hati ini"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle ein animiertes GIF für deinen Fokusfreund"
+            "value" : "Wähle ein Bild für diese Stimmung"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フォーカスフレンドにするアニメーションGIFを選択してください"
+            "value" : "この状態の画像を選択"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "집중 친구로 사용할 움직이는 GIF를 선택하세요"
+            "value" : "이 상태의 이미지를 선택하세요"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chọn ảnh GIF động cho bạn đồng hành của bạn"
+            "value" : "Chọn hình ảnh cho trạng thái này"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scegli una GIF animata per il tuo amico del focus"
+            "value" : "Scegli un’immagine per questo stato d’animo"
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "یک GIF متحرک برای همراه تمرکزتان انتخاب کنید"
+            "value" : "برای این حالت یک تصویر انتخاب کنید"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz animowany GIF dla swojego zwierzaka"
+            "value" : "Wybierz obraz dla tego nastroju"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Обери анімований GIF для свого улюбленця"
+            "value" : "Виберіть зображення для цього стану"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "เลือก GIF แบบเคลื่อนไหวสำหรับเพื่อนร่วมโฟกัสของคุณ"
+            "value" : "เลือกรูปภาพสำหรับอารมณ์นี้"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kies een geanimeerde GIF voor je focusmaatje"
+            "value" : "Kies een afbeelding voor deze stemming"
           }
         }
       }
@@ -1916,6 +2190,143 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies je maatje"
+          }
+        }
+      }
+    },
+    "Compact" : {
+      "comment" : "Notch design option: a smaller notch with narrower wings and smaller panels.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompakt"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "紧凑"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "緊湊"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कॉम्पैक्ट"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compacto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compact"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مضغوط"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "কমপ্যাক্ট"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compacto"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Компактный"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کمپیکٹ"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ringkas"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompakt"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コンパクト"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "컴팩트"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gọn"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compatto"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فشرده"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompaktowy"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Компактний"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "กะทัดรัด"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compact"
           }
         }
       }
@@ -2327,6 +2738,143 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schattig"
+          }
+        }
+      }
+    },
+    "Design" : {
+      "comment" : "Label for choosing the notch design (standard or compact).",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tasarım"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设计"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設計"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिज़ाइन"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diseño"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparence"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التصميم"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ডিজাইন"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вид"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ڈیزائن"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desain"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デザイン"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "디자인"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kiểu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "طرح"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wygląd"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вигляд"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ดีไซน์"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ontwerp"
           }
         }
       }
@@ -6859,6 +7407,417 @@
         }
       }
     },
+    "My Pet" : {
+      "comment" : "Default name of a custom pet when the user doesn't type one.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evcil Hayvanım"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的宠物"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的寵物"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "मेरा पालतू"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi mascota"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon compagnon"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حيواني الأليف"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "আমার পোষা প্রাণী"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meu pet"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мой питомец"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "میرا پالتو"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peliharaanku"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mein Haustier"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マイペット"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내 펫"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thú cưng của tôi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il mio animale"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حیوان خانگی من"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mój zwierzak"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мій улюбленець"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สัตว์เลี้ยงของฉัน"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mijn huisdier"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "comment" : "Label of the name field for a custom pet.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名称"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名稱"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नाम"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الاسم"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "নাম"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نام"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nama"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tên"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نام"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nazwa"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ім’я"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ชื่อ"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam"
+          }
+        }
+      }
+    },
+    "New Pet" : {
+      "comment" : "Title of the sheet for adding a custom pet.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Evcil Hayvan"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新宠物"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新寵物"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नया पालतू"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva mascota"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau compagnon"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حيوان أليف جديد"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "নতুন পোষা প্রাণী"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo pet"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый питомец"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نیا پالتو"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peliharaan Baru"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Haustier"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しいペット"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 펫"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thú cưng mới"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo animale"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حیوان خانگی جدید"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nowy zwierzak"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новий улюбленець"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สัตว์เลี้ยงใหม่"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuw huisdier"
+          }
+        }
+      }
+    },
     "New topic" : {
       "comment" : "Placeholder text in a text field where the user types a new topic name (e.g. 'Math').",
       "localizations" : {
@@ -7266,6 +8225,143 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen onderwerp"
+          }
+        }
+      }
+    },
+    "Notch" : {
+      "comment" : "Settings section title for how the notch looks.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çentik"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刘海"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "瀏海"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नॉच"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encoche"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "النتوء"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "নচ"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чёлка"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نوچ"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ノッチ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "노치"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tai thỏ"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ناچ"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виріз"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "รอยบาก"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch"
           }
         }
       }
@@ -9327,6 +10423,143 @@
         }
       }
     },
+    "Pick an image for each mood. Still images are turned into animated GIFs; empty moods use the first image." : {
+      "comment" : "Explanation in the sheet for adding a custom pet.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her ruh hali için bir görsel seç. Sabit görseller otomatik olarak hareketli GIF'e dönüştürülür; boş bırakılanlarda ilk görsel kullanılır."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为每种状态选择一张图片。静态图片会转换为动画 GIF；空白状态将使用第一张图片。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "為每種狀態選擇一張圖片。靜態圖片會轉換為動畫 GIF；空白狀態將使用第一張圖片。"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हर मूड के लिए एक चित्र चुनें। स्थिर चित्र एनिमेटेड GIF में बदल दिए जाते हैं; खाली मूड पहला चित्र उपयोग करते हैं।"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige una imagen para cada estado. Las imágenes fijas se convierten en GIF animados; los estados vacíos usan la primera imagen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez une image pour chaque humeur. Les images fixes sont transformées en GIF animés ; les humeurs vides utilisent la première image."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اختر صورة لكل حالة. تُحوَّل الصور الثابتة إلى صور GIF متحركة، وتستخدم الحالات الفارغة الصورة الأولى."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "প্রতিটি মেজাজের জন্য একটি ছবি বেছে নিন। স্থির ছবিগুলো অ্যানিমেটেড GIF-এ রূপান্তরিত হয়; খালি মেজাজগুলো প্রথম ছবিটি ব্যবহার করে।"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha uma imagem para cada humor. Imagens estáticas viram GIFs animados; humores vazios usam a primeira imagem."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите изображение для каждого состояния. Статичные изображения превращаются в анимированные GIF; для пустых состояний используется первое изображение."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ہر موڈ کے لیے ایک تصویر منتخب کریں۔ ساکن تصاویر متحرک GIF میں بدل دی جاتی ہیں؛ خالی موڈ پہلی تصویر استعمال کرتے ہیں۔"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pilih gambar untuk setiap suasana hati. Gambar diam diubah menjadi GIF animasi; suasana hati yang kosong memakai gambar pertama."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle für jede Stimmung ein Bild. Standbilder werden zu animierten GIFs; leere Stimmungen verwenden das erste Bild."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "状態ごとに画像を選んでください。静止画はアニメーション GIF に変換され、空の状態には最初の画像が使われます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "상태마다 이미지를 선택하세요. 정지 이미지는 움직이는 GIF로 변환되며, 비어 있는 상태에는 첫 번째 이미지가 사용됩니다."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chọn một hình ảnh cho mỗi trạng thái. Ảnh tĩnh sẽ được chuyển thành GIF động; trạng thái trống sẽ dùng ảnh đầu tiên."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli un’immagine per ogni stato d’animo. Le immagini statiche diventano GIF animate; gli stati vuoti usano la prima immagine."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "برای هر حالت یک تصویر انتخاب کنید. تصاویر ثابت به GIF متحرک تبدیل می‌شوند؛ حالت‌های خالی از تصویر اول استفاده می‌کنند."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz obraz dla każdego nastroju. Obrazy statyczne zamieniają się w animowane GIF-y; puste nastroje używają pierwszego obrazu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть зображення для кожного стану. Статичні зображення перетворюються на анімовані GIF; для порожніх станів використовується перше зображення."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เลือกรูปภาพสำหรับแต่ละอารมณ์ ภาพนิ่งจะถูกแปลงเป็น GIF เคลื่อนไหว ส่วนอารมณ์ที่ว่างจะใช้รูปแรก"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kies een afbeelding voor elke stemming. Stilstaande afbeeldingen worden geanimeerde GIF's; lege stemmingen gebruiken de eerste afbeelding."
+          }
+        }
+      }
+    },
     "Pixel" : {
       "comment" : "Pet art style option: retro pixel-art pets.",
       "localizations" : {
@@ -10282,6 +11515,143 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder"
+          }
+        }
+      }
+    },
+    "Remove solid background" : {
+      "comment" : "Toggle in the new pet sheet: makes a flat background color around the image transparent.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Düz arka planı kaldır"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除纯色背景"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除純色背景"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सादा पृष्ठभूमि हटाएँ"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar fondo liso"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer le fond uni"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إزالة الخلفية الموحدة"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "একরঙা পটভূমি সরান"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remover fundo liso"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Убрать однотонный фон"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سادہ پس منظر ہٹائیں"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hapus latar polos"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einfarbigen Hintergrund entfernen"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "単色の背景を削除"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단색 배경 제거"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xóa nền đơn sắc"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi sfondo uniforme"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حذف پس‌زمینه یکدست"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń jednolite tło"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прибрати однотонний фон"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ลบพื้นหลังสีเรียบ"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effen achtergrond verwijderen"
           }
         }
       }
@@ -12890,6 +14260,143 @@
         }
       }
     },
+    "Sleeping" : {
+      "comment" : "Mood of a custom pet: shown during breaks. Short label under an image slot.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyurken"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "睡觉中"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "睡覺中"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सोते हुए"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durmiendo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Endormi"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نائم"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ঘুমাচ্ছে"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dormindo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спит"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سوتے ہوئے"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidur"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schläft"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "睡眠中"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잠자는 중"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang ngủ"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dorme"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "در خواب"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Śpi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спить"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "กำลังนอน"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slapen"
+          }
+        }
+      }
+    },
     "Small" : {
       "comment" : "Notch size option.",
       "extractionState" : "manual",
@@ -13024,6 +14531,143 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klein"
+          }
+        }
+      }
+    },
+    "Standard" : {
+      "comment" : "Notch design option: the regular size.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standart"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标准"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標準"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "मानक"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estándar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قياسي"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "স্ট্যান্ডার্ড"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Padrão"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обычный"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معیاری"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standar"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標準"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "표준"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiêu chuẩn"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "استاندارد"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standardowy"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Звичайний"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "มาตรฐาน"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaard"
           }
         }
       }
@@ -14261,6 +15905,143 @@
         }
       }
     },
+    "The notch opens for a moment when you switch, so you can see the change in place." : {
+      "comment" : "Footer under the notch design picker.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Değiştirdiğinde çentik bir anlığına açılır, böylece farkı yerinde görebilirsin."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换时刘海会短暂展开，让你直接看到变化。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切換時瀏海會短暫展開，讓你直接看到變化。"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बदलने पर नॉच कुछ पल के लिए खुलता है, ताकि आप बदलाव वहीं देख सकें।"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al cambiar, el notch se abre un momento para que veas el cambio en su sitio."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’encoche s’ouvre un instant quand vous changez, pour voir le résultat sur place."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عند التبديل يُفتح النتوء للحظة لترى التغيير في مكانه."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বদলালে নচটি কিছুক্ষণের জন্য খোলে, যাতে আপনি পরিবর্তনটি সেখানেই দেখতে পান।"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ao trocar, o notch se abre por um instante para você ver a mudança no lugar."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "При переключении чёлка ненадолго открывается, чтобы вы увидели изменения на месте."
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تبدیل کرنے پر نوچ ایک لمحے کے لیے کھلتا ہے تاکہ آپ تبدیلی وہیں دیکھ سکیں۔"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saat diganti, notch terbuka sejenak agar kamu bisa melihat perubahannya langsung."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Umschalten öffnet sich die Notch kurz, damit du die Änderung direkt siehst."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切り替えるとノッチが少しの間開き、変化をその場で確認できます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전환하면 노치가 잠시 열려 바뀐 모습을 바로 확인할 수 있습니다."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Khi chuyển, tai thỏ sẽ mở ra một lúc để bạn thấy thay đổi ngay tại chỗ."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando cambi, il notch si apre per un attimo così vedi subito la differenza."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هنگام تغییر، ناچ لحظه‌ای باز می‌شود تا تغییر را همان‌جا ببینید."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Po przełączeniu notch na chwilę się otwiera, żeby było widać zmianę na miejscu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час перемикання виріз ненадовго відкривається, щоб ви побачили зміни на місці."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เมื่อสลับ รอยบากจะเปิดขึ้นครู่หนึ่งเพื่อให้คุณเห็นการเปลี่ยนแปลงในที่จริง"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bij het wisselen gaat de notch even open, zodat je de verandering meteen ziet."
+          }
+        }
+      }
+    },
     "Theme" : {
       "comment" : "Settings section header: color theme of the app.",
       "localizations" : {
@@ -14398,139 +16179,139 @@
         }
       }
     },
-    "This file couldn't be added. Please choose a valid GIF." : {
-      "comment" : "Error message when importing a custom pet fails.",
+    "This image couldn't be read. Please choose a PNG, JPEG or GIF file." : {
+      "comment" : "Error when an image for a custom pet can't be decoded.",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bu dosya eklenemedi. Lütfen geçerli bir GIF seç."
+            "value" : "Bu görsel okunamadı. Lütfen PNG, JPEG veya GIF dosyası seç."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "无法添加此文件。请选择有效的 GIF 文件。"
+            "value" : "无法读取此图片。请选择 PNG、JPEG 或 GIF 文件。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無法加入此檔案。請選擇有效的 GIF 檔案。"
+            "value" : "無法讀取此圖片。請選擇 PNG、JPEG 或 GIF 檔案。"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "यह फ़ाइल जोड़ी नहीं जा सकी। कृपया कोई मान्य GIF चुनें।"
+            "value" : "यह चित्र पढ़ा नहीं जा सका। कृपया PNG, JPEG या GIF फ़ाइल चुनें।"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No se ha podido añadir este archivo. Elige un GIF válido."
+            "value" : "No se pudo leer esta imagen. Elige un archivo PNG, JPEG o GIF."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossible d’ajouter ce fichier. Choisis un GIF valide."
+            "value" : "Impossible de lire cette image. Choisissez un fichier PNG, JPEG ou GIF."
           }
         },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تعذّرت إضافة هذا الملف. يُرجى اختيار ملف GIF صالح."
+            "value" : "تعذّرت قراءة هذه الصورة. يُرجى اختيار ملف PNG أو JPEG أو GIF."
           }
         },
         "bn" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "এই ফাইলটি যোগ করা যায়নি। অনুগ্রহ করে একটি সঠিক GIF বেছে নিন।"
+            "value" : "এই ছবিটি পড়া যায়নি। অনুগ্রহ করে একটি PNG, JPEG বা GIF ফাইল বেছে নিন।"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não foi possível adicionar este arquivo. Escolha um GIF válido."
+            "value" : "Não foi possível ler esta imagem. Escolha um arquivo PNG, JPEG ou GIF."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось добавить этот файл. Выбери корректный GIF."
+            "value" : "Не удалось прочитать изображение. Выберите файл PNG, JPEG или GIF."
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "یہ فائل شامل نہیں کی جا سکی۔ براہ کرم کوئی درست GIF منتخب کریں۔"
+            "value" : "یہ تصویر پڑھی نہیں جا سکی۔ براہ کرم PNG، JPEG یا GIF فائل منتخب کریں۔"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "File ini tidak dapat ditambahkan. Pilih GIF yang valid."
+            "value" : "Gambar ini tidak dapat dibaca. Pilih file PNG, JPEG, atau GIF."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diese Datei konnte nicht hinzugefügt werden. Bitte wähle ein gültiges GIF."
+            "value" : "Dieses Bild konnte nicht gelesen werden. Bitte wähle eine PNG-, JPEG- oder GIF-Datei."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このファイルを追加できませんでした。有効なGIFを選択してください。"
+            "value" : "この画像を読み込めませんでした。PNG、JPEG、または GIF ファイルを選択してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 파일을 추가할 수 없습니다. 유효한 GIF 파일을 선택하세요."
+            "value" : "이 이미지를 읽을 수 없습니다. PNG, JPEG 또는 GIF 파일을 선택하세요."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không thể thêm tệp này. Vui lòng chọn tệp GIF hợp lệ."
+            "value" : "Không thể đọc hình ảnh này. Vui lòng chọn tệp PNG, JPEG hoặc GIF."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossibile aggiungere questo file. Scegli una GIF valida."
+            "value" : "Impossibile leggere questa immagine. Scegli un file PNG, JPEG o GIF."
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "این فایل اضافه نشد. لطفاً یک GIF معتبر انتخاب کنید."
+            "value" : "این تصویر خوانده نشد. لطفاً یک فایل PNG، JPEG یا GIF انتخاب کنید."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie udało się dodać tego pliku. Wybierz prawidłowy plik GIF."
+            "value" : "Nie udało się odczytać obrazu. Wybierz plik PNG, JPEG lub GIF."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не вдалося додати цей файл. Обери коректний GIF."
+            "value" : "Не вдалося прочитати зображення. Виберіть файл PNG, JPEG або GIF."
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ไม่สามารถเพิ่มไฟล์นี้ได้ โปรดเลือกไฟล์ GIF ที่ถูกต้อง"
+            "value" : "ไม่สามารถอ่านรูปภาพนี้ได้ โปรดเลือกไฟล์ PNG, JPEG หรือ GIF"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dit bestand kan niet worden toegevoegd. Kies een geldige GIF."
+            "value" : "Deze afbeelding kan niet worden gelezen. Kies een PNG-, JPEG- of GIF-bestand."
           }
         }
       }
@@ -15764,6 +17545,280 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versie"
+          }
+        }
+      }
+    },
+    "Waiting" : {
+      "comment" : "Mood of a custom pet: shown when no timer is running. Short label under an image slot.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beklerken"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "等待中"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "等待中"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "प्रतीक्षा में"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esperando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "في الانتظار"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অপেক্ষায়"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esperando"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ждёт"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انتظار میں"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menunggu"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wartet"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "待機中"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "대기 중"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang chờ"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In attesa"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "در انتظار"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czeka"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чекає"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "รออยู่"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wachten"
+          }
+        }
+      }
+    },
+    "Working" : {
+      "comment" : "Mood of a custom pet: shown during focus sessions. Short label under an image slot.",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çalışırken"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "工作中"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "工作中"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "काम करते हुए"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trabajando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Au travail"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يعمل"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "কাজ করছে"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trabalhando"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Работает"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کام کرتے ہوئے"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bekerja"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arbeitet"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "作業中"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "작업 중"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang làm việc"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al lavoro"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "در حال کار"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pracuje"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Працює"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "กำลังทำงาน"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werken"
           }
         }
       }

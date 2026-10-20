@@ -34,7 +34,7 @@ final class NotchPanel: NSPanel {
 }
 
 /// Lets the first click on a button work without activating the app first.
-final class NotchHostingView<Content: View>: NSHostingView<Content> {
+final class NotchHostingView: NSHostingView<NotchRootView> {
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
 }
 
@@ -128,7 +128,7 @@ final class NotchWindowController {
     private func isPointerInside() -> Bool {
         guard let screen else { return false }
         let mode = model.notchMode
-        let size = NotchLayout.frameSize(mode, model.notch.metrics)
+        let size = NotchLayout.frameSize(mode, model.notch.metrics, model.settings.notchDesign)
         // Once open, allow some slack so small overshoots don't collapse the panel.
         let slack: CGFloat = mode.isOpen ? 14 : 2
         let zone = NSRect(

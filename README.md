@@ -32,7 +32,8 @@ On macOS it wraps around the MacBook notch. On Windows it sits right in the task
 - **The Pomodoro cycle:** Set the focus, short break and long break lengths, and how many sessions come before a long break. Breaks and focus sessions can start on their own.
 - **Heads-ups on time:** When a break starts, when it ends, and **5 minutes before** the next focus session (adjustable), the notch shows an alert, plays a Focus Notch chime and sends a system notification.
 - **Controls:** Start, pause, skip, reset, and **Finish** to end the session with a summary.
-- **Focus friends:** 12 animals in two styles, cute and pixel art. They type on a laptop while you focus, nap during breaks and jump for joy when you finish. Click one to hear it. You can also add your own GIF.
+- **Focus friends:** 12 animals in two styles, cute and pixel art. They type on a laptop while you focus, nap during breaks and jump for joy when you finish. Click one to hear it. You can also add your own pet from up to four images (waiting, working, sleeping, celebrating); still images are turned into animated GIFs automatically.
+- **Standard or compact:** Prefer a smaller notch? The compact design narrows the notch while a timer runs and shrinks the open panel. A live preview in Settings shows the difference.
 - **Topics and statistics:** Pick what you're working on (Math, Coding…) and your focus time is logged under it. Charts per topic for today, this week and all time.
 - **Themes:** Coral, Ocean, Forest, Lavender, Sunset and Mono.
 - **23 languages:** English, Chinese (Simplified and Traditional), Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, Urdu, Indonesian, German, Japanese, Turkish, Korean, Vietnamese, Italian, Persian, Polish, Ukrainian, Thai and Dutch.
@@ -59,9 +60,9 @@ The notch stands in the taskbar and grows upward when you hover over it. Pick th
 
 | Timer | Focus friend |
 | :---: | :---: |
-| <img src="docs/images/settings-timer.png" width="380" alt="Duration sliders"> | <img src="docs/images/settings-pets.png" width="380" alt="Choosing a pet"> |
+| <img src="docs/images/settings-timer.png" width="380" alt="Duration sliders"> | <img src="docs/images/settings-pets.png" width="380" alt="Choosing a pet or adding your own"> |
 | **Statistics** | **General (Windows)** |
-| <img src="docs/images/settings-statistics.png" width="380" alt="Focus time per topic"> | <img src="docs/images/settings-general.png" width="380" alt="Language, notch position and size, theme"> |
+| <img src="docs/images/settings-statistics.png" width="380" alt="Focus time per topic"> | <img src="docs/images/settings-general.png" width="380" alt="Language, notch design with preview, notch position and size, theme"> |
 
 ## Focus friends
 
@@ -109,7 +110,7 @@ Click your pet in the open panel to cheer it up; it answers with its own sound.
 
 ## Download and install
 
-Ready-made builds are on the [**Releases**](https://github.com/metekaganmusaak/focus-notch/releases/latest) page.
+Ready-made builds are on the [**Releases**](https://github.com/metekaganmusaak/focus-notch/releases/latest) page. See [CHANGELOG.md](CHANGELOG.md) for what's new.
 
 ### macOS
 
@@ -156,10 +157,10 @@ Requires 64-bit Windows 10 or 11.
 6. **Pet your friend:** Click the pet in the open panel and it cheers and makes a sound.
 7. **Settings:** Open them with the ⚙ button in the panel or from the icon menu.
    - **Timer:** Durations and auto-start.
-   - **Focus Friend:** Pet, style, pet sounds, and adding your own GIF (drag and drop works).
+   - **Focus Friend:** Pet, style, pet sounds, and adding your own pet from up to four images, one per mood (drag and drop works).
    - **Statistics:** Time per topic and managing topics.
    - **Notifications:** Notifications, sounds and the reminder lead time.
-   - **General:** Language, launch at login and theme. On Windows, also the notch position and size.
+   - **General:** Language, launch at login, notch design (Standard or Compact, with a live preview) and theme. On Windows, also the notch position and size.
 
 ## macOS vs. Windows
 
@@ -170,6 +171,7 @@ Requires 64-bit Windows 10 or 11.
 | **Position** | Fixed to the notch | **Settings → General → Notch position** (Left / Center / Right, plus a slider), or drag the open panel |
 | **Default position** | Center | Left of the icons when Windows 11 centers them, otherwise center |
 | **Size** | Matches the notch | Small, Medium or Large, to fit a busy taskbar |
+| **Design** | Standard or Compact | Standard or Compact |
 | **Control icon** | Menu bar (can be hidden) | Notification area |
 | **Changing language** | Restarts the app | Applies instantly |
 | **Built with** | SwiftUI + AppKit (native) | Electron |
@@ -191,3 +193,4 @@ focus-notch/
 - **Windows:** `cd windows && npm install && npm start`. Build the installer with `npm run dist`. Details in [windows/README.md](windows/README.md).
 - **Code structure and conventions:** [CLAUDE.md](CLAUDE.md)
 - **Art and sound sources and their licenses:** [ASSETS.md](ASSETS.md)
+- **What changed in each version:** [CHANGELOG.md](CHANGELOG.md)

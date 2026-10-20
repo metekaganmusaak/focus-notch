@@ -24,6 +24,8 @@ const DEFAULT_SETTINGS = {
   notchPosition: null,
   /// How much bar space the collapsed notch takes: 'small', 'medium' or 'large'.
   notchSize: 'medium',
+  /// 'standard', or 'compact' for a narrower pill and smaller panels.
+  notchDesign: 'standard',
 };
 
 function dayKey(date = new Date()) {

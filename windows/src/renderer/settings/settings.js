@@ -1,6 +1,6 @@
 (() => {
   const api = window.focusNotch;
-  const { t, duration, phaseColor, THEMES, THEME_NAMES, icon, escapeHTML: h } = window.FN;
+  const { t, duration, clock, phaseColor, THEMES, THEME_NAMES, icon, escapeHTML: h, notchLayout } = window.FN;
 
   const TABS = [
     { id: 'timer', title: 'Timer', icon: 'timer' },
@@ -13,12 +13,14 @@
   /// Notch position presets, as fractions of the screen width.
   const POSITIONS = [['Left', 0.22], ['Center', 0.5], ['Right', 0.78]];
   const NOTCH_SIZES = [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']];
+  const NOTCH_DESIGNS = [['standard', 'Standard'], ['compact', 'Compact']];
+  /// The design preview draws the notch at this scale.
+  const PREVIEW_SCALE = 0.7;
   const PERIODS = [['today', 'Today'], ['week', 'This Week'], ['allTime', 'All Time']];
 
   let model = null;
   let tab = 'timer';
   let period = 'today';
-  let importError = '';
   let renderedSignature = '';
 
   const pane = document.getElementById('pane');
@@ -84,9 +86,9 @@
         ${pet.isCustom ? `<span class="remove" role="button" data-remove-pet="${h(pet.id)}" title="${h(t('Remove'))}">${icon('close', 10)}</span>` : ''}
       </button>`).join('');
     const addCard = `
-      <button class="pet-card add-card" data-action="choose-gif">
+      <button class="pet-card add-card" data-action="add-pet">
         <span class="art">${icon('plus', 22)}</span>
-        <span class="name">${h(t('Add GIF…'))}</span>
+        <span class="name">${h(t('Add Pet…'))}</span>
       </button>`;
     const style = `
       <div class="row">
@@ -102,7 +104,7 @@
       + group(t('Choose your companion'), [
         style,
         `<div class="pet-grid${s.showPet ? '' : ' grid-disabled'}">${cards}${addCard}</div>`,
-      ], [t('Add your own pet: drop an animated GIF here or click +.'), importError].filter(Boolean).join(' '));
+      ], t('Add your own pet: drop up to four images here or click +.'));
   }
 
   function statisticsPane() {
@@ -185,8 +187,59 @@
         <span class="label">${h(t('Launch at login'))}</span>
         <span class="switch"><input type="checkbox" data-login-item ${model.loginItem ? 'checked' : ''}><span></span></span>
       </label>`,
-    ]) + positionGroup() + group(t('Theme'), [`<div class="themes">${themes}</div>`])
+    ]) + designGroup() + positionGroup() + group(t('Theme'), [`<div class="themes">${themes}</div>`])
       + group('', [`<div class="row"><span class="label">${h(t('Version'))}</span><span class="unit">${h(model.version)}</span></div>`]);
+  }
+
+  function designGroup() {
+    return group(t('Notch'), [
+      `<div class="row">
+        <span class="label">${h(t('Design'))}</span>
+        <div class="segmented">${NOTCH_DESIGNS.map(([value, title]) =>
+          `<button data-notch-design="${value}" aria-pressed="${model.settings.notchDesign === value}">${h(t(title))}</button>`).join('')}</div>
+      </div>`,
+      designPreview(),
+    ], t('The notch opens for a moment when you switch, so you can see the change in place.'));
+  }
+
+  /// A shrunken mock of the notch, collapsed and open, with the real sizes (FN.notchLayout)
+  /// and the styles of notch.css for the chosen design.
+  function designPreview() {
+    const s = model.settings;
+    const { edge, band } = model.placement;
+    const compact = s.notchDesign === 'compact';
+    const tint = phaseColor(s.theme, 'focus');
+    const box = (mode, design = s.notchDesign) => notchLayout(mode, { size: s.notchSize, design, band });
+    const art = (size) => (model.pet
+      ? `<img class="${model.pet.pixel ? 'pixel' : ''}" src="${h(model.pet.urls.idle)}" style="width:${size}px;height:${size}px" alt="">`
+      : `<span style="color:${tint}">${icon('timer', size * 0.8)}</span>`);
+    const time = clock(model.engine.remaining);
+    // Each screen keeps the standard height, so switching doesn't make the pane jump.
+    const screen = (mode, content) => {
+      const { w, h: height, bottom } = box(mode);
+      return `
+        <div class="mock-screen${edge === 'bottom' ? ' bottom' : ''}" style="height:${box(mode, 'standard').h * PREVIEW_SCALE + 14}px">
+          <div class="mock-notch${compact ? ' compact' : ''}" style="width:${w}px;height:${height}px;--radius:${bottom}px;--band:${band}px;--tint:${tint};zoom:${PREVIEW_SCALE}">${content}</div>
+        </div>`;
+    };
+    const collapsed = screen('compact', `
+      <div class="mock-pill">${art(compact ? 22 : 26)}<span class="mock-time">${h(time)}</span></div>`);
+    const open = screen('expanded', `
+      <div class="mock-header">
+        <span class="mock-badge"><i></i>${h(t('Focus'))}</span>
+        <span class="mock-today"><span class="mock-flame">${icon('flame', 12)}</span><b>${model.today.sessions}</b>${compact ? '' : `<span>·</span><span>${h(duration(model.today.focusSeconds))}</span>`}<i class="mock-button small">${icon('gear', 13)}</i></span>
+      </div>
+      <div class="mock-main">
+        <span class="mock-avatar">${art(compact ? 42 : 64)}</span>
+        <span class="mock-clock"><small>${h(t('Ready to focus?'))}</small><b>${h(time)}</b></span>
+        <span class="mock-controls">
+          <span class="mock-trio"><i class="mock-button">${icon('reset', compact ? 12 : 15)}</i><i class="mock-button primary">${icon('play', compact ? 16 : 20)}</i><i class="mock-button">${icon('skip', compact ? 12 : 15)}</i></span>
+          ${compact ? `<i class="mock-button">${icon('flag', 12)}</i>` : `<span class="mock-capsule">${icon('flag', 13)}${h(t('Finish'))}</span>`}
+        </span>
+      </div>
+      <div class="mock-chips">${icon('tag', 12)}${(model.topics.length ? model.topics.slice(0, 2).map((topic) => topic.name) : [t('Add topic')])
+        .map((name) => `<span>${h(name)}</span>`).join('')}</div>`);
+    return `<div class="design-preview" aria-hidden="true">${collapsed}${open}</div>`;
   }
 
   /// Where the virtual notch sits along the taskbar (Windows, or any bottom placement).
@@ -213,7 +266,7 @@
 
   /// Only the data a pane shows, so the running timer doesn't redraw it (and restart its GIFs) every second.
   function signature() {
-    const parts = { tab, period, importError, settings: model.settings };
+    const parts = { tab, period, settings: model.settings };
     if (tab === 'pets') parts.pets = model.pets.map((pet) => pet.id + pet.name);
     if (tab === 'statistics') Object.assign(parts, { statistics: model.statistics, topics: model.topics });
     if (tab === 'general') Object.assign(parts, { loginItem: model.loginItem, placement: model.placement });
@@ -289,6 +342,8 @@
     if (pet) return api.setSetting('selectedPetID', pet.dataset.pet);
     const style = target.closest('[data-style]');
     if (style) return api.setSetting('petStyle', style.dataset.style);
+    const notchDesign = target.closest('[data-notch-design]');
+    if (notchDesign) return api.setSetting('notchDesign', notchDesign.dataset.notchDesign);
     const notchSize = target.closest('[data-notch-size]');
     if (notchSize) return api.setSetting('notchSize', notchSize.dataset.notchSize);
     const position = target.closest('[data-position]');
@@ -309,11 +364,7 @@
     }
     const action = target.closest('[data-action]');
     if (!action) return;
-    if (action.dataset.action === 'choose-gif') {
-      const ok = await api.chooseGIF();
-      importError = ok ? '' : t("This file couldn't be added. Please choose a valid GIF.");
-      return render(true);
-    }
+    if (action.dataset.action === 'add-pet') return openSheet();
     api.action(action.dataset.action);
   });
 
@@ -330,7 +381,155 @@
     if (button) selectTab(button.dataset.tab);
   });
 
-  // Dropping GIFs anywhere on the pets tab adds them.
+  // MARK: - New pet sheet
+
+  // Up to four images, one per mood, each turned into an animated GIF as soon as it's picked.
+  const { gifBytes, MOODS } = window.PetGIFMaker;
+  const MOOD_TITLES = { idle: 'Waiting', focus: 'Working', rest: 'Sleeping', celebrate: 'Celebrating' };
+  const UNREADABLE = "This image couldn't be read. Please choose a PNG, JPEG or GIF file.";
+  /// { name, sources: mood → File, previews: mood → { bytes, url }, removeBackground, error, busy }, or null when closed.
+  let draft = null;
+  let pickingMood = null;
+
+  const sheet = document.createElement('div');
+  sheet.className = 'sheet-backdrop';
+  sheet.hidden = true;
+  const picker = document.createElement('input');
+  picker.type = 'file';
+  picker.accept = 'image/*';
+  picker.hidden = true;
+  document.body.append(sheet, picker);
+
+  const firstSource = () => MOODS.map((mood) => draft.sources[mood]).find(Boolean);
+  const defaultName = () => firstSource()?.name.replace(/\.[^.]+$/, '').slice(0, 40) || t('My Pet');
+
+  function renderSheet() {
+    sheet.hidden = !draft;
+    if (!draft) {
+      sheet.innerHTML = '';
+      return;
+    }
+    const slots = MOODS.map((mood) => {
+      const preview = draft.previews[mood];
+      return `
+        <div class="pet-card mood-slot" data-mood="${mood}">
+          <button class="art${preview ? '' : ' empty-slot'}" data-pick-mood="${mood}" aria-label="${h(t(MOOD_TITLES[mood]))}">
+            ${preview ? `<img src="${h(preview.url)}" alt="">` : icon('plus', 22)}
+          </button>
+          ${preview ? `<button class="remove" data-clear-mood="${mood}" title="${h(t('Remove'))}">${icon('close', 10)}</button>` : ''}
+          <span class="name">${h(t(MOOD_TITLES[mood]))}</span>
+        </div>`;
+    }).join('');
+    sheet.innerHTML = `
+      <div class="sheet" role="dialog" aria-modal="true" aria-label="${h(t('New Pet'))}">
+        <h2>${h(t('New Pet'))}</h2>
+        <input class="text-input" data-pet-name maxlength="40" value="${h(draft.name)}" placeholder="${h(defaultName())}" aria-label="${h(t('Name'))}">
+        <div class="mood-slots">${slots}</div>
+        <label class="row sheet-toggle">
+          <span class="label">${h(t('Remove solid background'))}</span>
+          <span class="switch"><input type="checkbox" data-remove-background ${draft.removeBackground ? 'checked' : ''}><span></span></span>
+        </label>
+        <p class="footer">${h(t('Pick an image for each mood. Still images are turned into animated GIFs; empty moods use the first image.'))}</p>
+        ${draft.error ? `<p class="footer error">${h(draft.error)}</p>` : ''}
+        <div class="sheet-buttons">
+          <button class="button" data-sheet="cancel">${h(t('Cancel'))}</button>
+          <button class="button primary" data-sheet="add" ${firstSource() && !draft.busy ? '' : 'disabled'}>${h(t('Add'))}</button>
+        </div>
+      </div>`;
+  }
+
+  async function setImage(mood, file) {
+    const current = draft;
+    try {
+      const bytes = await gifBytes(file, mood, { removeBackground: current.removeBackground });
+      if (draft !== current) return;
+      if (current.previews[mood]) URL.revokeObjectURL(current.previews[mood].url);
+      current.sources[mood] = file;
+      current.previews[mood] = { bytes, url: URL.createObjectURL(new Blob([bytes], { type: 'image/gif' })) };
+      current.error = '';
+    } catch {
+      if (draft !== current) return;
+      current.error = t(UNREADABLE);
+    }
+    renderSheet();
+  }
+
+  function clearImage(mood) {
+    URL.revokeObjectURL(draft.previews[mood]?.url);
+    delete draft.sources[mood];
+    delete draft.previews[mood];
+    renderSheet();
+  }
+
+  function openSheet(files = []) {
+    draft = { name: '', sources: {}, previews: {}, removeBackground: true, error: '', busy: false };
+    renderSheet();
+    files.slice(0, MOODS.length).forEach((file, index) => setImage(MOODS[index], file));
+    sheet.querySelector('[data-pet-name]').focus();
+  }
+
+  function closeSheet() {
+    for (const preview of Object.values(draft?.previews ?? {})) URL.revokeObjectURL(preview.url);
+    draft = null;
+    renderSheet();
+  }
+
+  /// Moods without an image get the first image with their own motion.
+  async function addDraftPet() {
+    const current = draft;
+    const first = firstSource();
+    if (!first || current.busy) return;
+    current.busy = true;
+    renderSheet();
+    try {
+      const gifs = {};
+      for (const mood of MOODS) gifs[mood] = current.previews[mood]?.bytes ?? await gifBytes(first, mood, { removeBackground: current.removeBackground });
+      const ok = await api.addPet(current.name.trim() || defaultName(), gifs);
+      if (draft !== current) return;
+      if (ok) return closeSheet();
+      current.error = t(UNREADABLE);
+    } catch {
+      current.error = t(UNREADABLE);
+    }
+    current.busy = false;
+    renderSheet();
+  }
+
+  sheet.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target === sheet) return closeSheet();
+    const pick = target.closest('[data-pick-mood]');
+    if (pick) {
+      pickingMood = pick.dataset.pickMood;
+      picker.value = '';
+      return picker.click();
+    }
+    const clear = target.closest('[data-clear-mood]');
+    if (clear) return clearImage(clear.dataset.clearMood);
+    const button = target.closest('[data-sheet]');
+    if (button?.dataset.sheet === 'cancel') return closeSheet();
+    if (button?.dataset.sheet === 'add') return addDraftPet();
+  });
+  sheet.addEventListener('input', (event) => {
+    if (event.target.matches('[data-pet-name]')) draft.name = event.target.value;
+  });
+  sheet.addEventListener('change', (event) => {
+    if (!event.target.matches('[data-remove-background]')) return;
+    draft.removeBackground = event.target.checked;
+    for (const [mood, file] of Object.entries(draft.sources)) setImage(mood, file);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!draft) return;
+    if (event.key === 'Escape') closeSheet();
+    else if (event.key === 'Enter' && event.target.matches('[data-pet-name]')) addDraftPet();
+  });
+  picker.addEventListener('change', () => {
+    const [file] = picker.files;
+    if (file && draft && pickingMood) setImage(pickingMood, file);
+  });
+
+  // Dropping images on the pets tab opens them as a new pet; on an open sheet they fill
+  // the slot they're dropped on, or the empty slots in order.
   document.addEventListener('dragover', (event) => {
     if (tab !== 'pets') return;
     event.preventDefault();
@@ -341,15 +540,24 @@
     event.preventDefault();
     document.body.classList.remove('drop-target');
     if (tab !== 'pets') return;
-    const files = [...event.dataTransfer.files].filter((file) => file.name.toLowerCase().endsWith('.gif'));
+    const files = [...event.dataTransfer.files].filter((file) => file.type.startsWith('image/'));
     if (!files.length) return;
-    const ok = await api.importFiles(files);
-    importError = ok ? '' : t("This file couldn't be added. Please choose a valid GIF.");
-    render(true);
+    if (!draft) return openSheet(files);
+    const slot = event.target.closest?.('[data-mood]');
+    if (slot) return setImage(slot.dataset.mood, files[0]);
+    const empty = MOODS.filter((mood) => !draft.sources[mood]);
+    files.slice(0, empty.length).forEach((file, index) => setImage(empty[index], file));
   });
 
   api.onDebug((options) => {
     if (options.tab) selectTab(options.tab);
+    // Sample images for the snapshot of the new pet sheet.
+    if (options.newPet) {
+      Promise.all(options.newPet.map(async (url) => {
+        const blob = await (await fetch(url)).blob();
+        return new File([blob], url.split('/').pop(), { type: url.endsWith('.gif') ? 'image/gif' : 'image/png' });
+      })).then(openSheet, () => openSheet());
+    }
   });
 
   api.onState((next) => {

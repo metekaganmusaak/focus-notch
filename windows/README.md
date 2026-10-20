@@ -41,6 +41,7 @@ This builds both the installer and a portable exe.
 - **Position and size:** Change them in **Settings → General**:
   - **Notch position:** Left, Center or Right, plus a slider for fine-tuning.
   - **Notch size:** Small, Medium or Large.
+  - **Design:** Standard or Compact (a narrower pill and smaller panels). A preview in Settings shows both states, and the notch opens for a moment when you switch.
   - You can also drag the open panel by its status strip. The position is remembered.
 - **A window that never moves:** The notch lives in a transparent, always-on-top 760×300 window above the taskbar. The window itself never moves or resizes. The black shape is a spring-animated SVG inside it, and the content is clipped to the same path, so growing and shrinking never jitters or overflows.
 - **Click-through:** Clicks on the transparent area go to whatever is underneath. The panel only captures the mouse while you're hovering over it. Because clicking the taskbar can raise it above other topmost windows, the notch puts itself back on top every 1.5 seconds.

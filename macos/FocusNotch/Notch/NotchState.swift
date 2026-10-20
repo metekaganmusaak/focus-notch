@@ -17,6 +17,18 @@ enum NotchMode: Equatable {
     var isOpen: Bool { self == .expanded || self == .alert }
 }
 
+/// How much room the notch takes. Compact has narrower wings and smaller panels.
+enum NotchDesign: String, CaseIterable {
+    case standard, compact
+
+    var title: String {
+        switch self {
+        case .standard: String(localized: "Standard")
+        case .compact: String(localized: "Compact")
+        }
+    }
+}
+
 /// Size of the physical notch, or of a stand-in on screens without one.
 struct NotchMetrics: Equatable {
     var notchWidth: CGFloat = 200
@@ -42,21 +54,28 @@ struct NotchMetrics: Equatable {
 }
 
 enum NotchLayout {
-    static let compactWing: CGFloat = 78
+    static func compactWing(_ design: NotchDesign) -> CGFloat {
+        design == .compact ? 62 : 78
+    }
     /// Fixed size of the transparent panel; the black shape animates inside it.
     static let windowSize = CGSize(width: 760, height: 300)
 
     /// Size of the black body, excluding the flared top corners.
-    static func bodySize(_ mode: NotchMode, _ metrics: NotchMetrics) -> CGSize {
+    static func bodySize(_ mode: NotchMode, _ metrics: NotchMetrics, _ design: NotchDesign) -> CGSize {
+        let compact = design == .compact
         switch mode {
         case .hidden, .idle:
-            CGSize(width: metrics.notchWidth, height: metrics.notchHeight)
+            return CGSize(width: metrics.notchWidth, height: metrics.notchHeight)
         case .compact:
-            CGSize(width: metrics.notchWidth + compactWing * 2, height: metrics.notchHeight)
+            return CGSize(width: metrics.notchWidth + compactWing(design) * 2, height: metrics.notchHeight)
         case .expanded:
-            CGSize(width: max(metrics.notchWidth + 310, 500), height: metrics.notchHeight + 170)
+            return compact
+                ? CGSize(width: max(metrics.notchWidth + 230, 420), height: metrics.notchHeight + 116)
+                : CGSize(width: max(metrics.notchWidth + 310, 500), height: metrics.notchHeight + 170)
         case .alert:
-            CGSize(width: max(metrics.notchWidth + 270, 470), height: metrics.notchHeight + 96)
+            return compact
+                ? CGSize(width: max(metrics.notchWidth + 230, 420), height: metrics.notchHeight + 74)
+                : CGSize(width: max(metrics.notchWidth + 270, 470), height: metrics.notchHeight + 96)
         }
     }
 
@@ -65,8 +84,8 @@ enum NotchLayout {
     }
 
     /// Full size of the shape including the flared top corners.
-    static func frameSize(_ mode: NotchMode, _ metrics: NotchMetrics) -> CGSize {
-        let body = bodySize(mode, metrics)
+    static func frameSize(_ mode: NotchMode, _ metrics: NotchMetrics, _ design: NotchDesign) -> CGSize {
+        let body = bodySize(mode, metrics, design)
         return CGSize(width: body.width + radii(mode, metrics).top * 2, height: body.height)
     }
 }
@@ -100,9 +119,12 @@ final class NotchState {
     @ObservationIgnored var releaseKeyboard: (() -> Void)?
     private(set) var alert: NotchAlert?
     private(set) var petReaction: PetMood?
+    /// Opens the panel for a moment, e.g. to show a new design.
+    private(set) var isPeeking = false
 
     @ObservationIgnored private var alertTask: Task<Void, Never>?
     @ObservationIgnored private var reactionTask: Task<Void, Never>?
+    @ObservationIgnored private var peekTask: Task<Void, Never>?
 
     func present(_ alert: NotchAlert) {
         self.alert = alert
@@ -117,6 +139,16 @@ final class NotchState {
     func dismissAlert() {
         alertTask?.cancel()
         alert = nil
+    }
+
+    func peek(for seconds: TimeInterval = 4) {
+        isPeeking = true
+        peekTask?.cancel()
+        peekTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(seconds))
+            guard !Task.isCancelled else { return }
+            self?.isPeeking = false
+        }
     }
 
     /// Briefly switches the pet to another animation, e.g. when it's clicked.

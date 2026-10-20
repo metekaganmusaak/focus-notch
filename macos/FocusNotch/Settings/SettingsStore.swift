@@ -21,6 +21,7 @@ final class SettingsStore {
         static let theme = "theme"
         static let currentTopicID = "currentTopicID"
         static let showMenuBarIcon = "showMenuBarIcon"
+        static let notchDesign = "notchDesign"
     }
 
     static let reminderChoices = [1, 2, 3, 5, 10, 15]
@@ -78,6 +79,9 @@ final class SettingsStore {
     var showMenuBarIcon: Bool {
         didSet { defaults.set(showMenuBarIcon, forKey: Keys.showMenuBarIcon) }
     }
+    var notchDesign: NotchDesign {
+        didSet { defaults.set(notchDesign.rawValue, forKey: Keys.notchDesign) }
+    }
 
     init() {
         defaults.register(defaults: [
@@ -113,5 +117,6 @@ final class SettingsStore {
         theme = Theme(rawValue: defaults.string(forKey: Keys.theme) ?? "") ?? .coral
         currentTopicID = defaults.string(forKey: Keys.currentTopicID)
         showMenuBarIcon = defaults.bool(forKey: Keys.showMenuBarIcon)
+        notchDesign = NotchDesign(rawValue: defaults.string(forKey: Keys.notchDesign) ?? "") ?? .standard
     }
 }

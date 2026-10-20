@@ -91,7 +91,7 @@ private struct MinutesSlider: View {
 
 struct PetSettingsView: View {
     let model: AppModel
-    @State private var importError: String?
+    @State private var draft: PetDraft?
     @State private var isDropTargeted = false
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 10), count: 5)
@@ -126,48 +126,29 @@ struct PetSettingsView: View {
                             remove(pet)
                         }
                     }
-                    AddPetCard(isTargeted: isDropTargeted, action: chooseGIF)
+                    AddPetCard(isTargeted: isDropTargeted) { draft = PetDraft() }
                 }
                 .padding(.vertical, 6)
                 .disabled(!settings.showPet)
                 .opacity(settings.showPet ? 1 : 0.5)
 
-                Text("Add your own pet: drop an animated GIF here or click +.")
+                Text("Add your own pet: drop up to four images here or click +.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                if let importError {
-                    Label(importError, systemImage: "exclamationmark.triangle.fill")
-                        .foregroundStyle(.orange)
-                }
             }
         }
         .formStyle(.grouped)
         .frame(width: paneWidth, height: 620)
         .dropDestination(for: URL.self) { urls, _ in
-            let gifs = urls.filter { UTType(filenameExtension: $0.pathExtension)?.conforms(to: .gif) == true }
-            gifs.forEach(importGIF)
-            return !gifs.isEmpty
+            let images = urls.filter { UTType(filenameExtension: $0.pathExtension)?.conforms(to: .image) == true }
+            guard !images.isEmpty else { return false }
+            draft = PetDraft(images: Array(images.prefix(4)))
+            return true
         } isTargeted: {
             isDropTargeted = $0
         }
-    }
-
-    private func chooseGIF() {
-        let panel = NSOpenPanel()
-        panel.allowedContentTypes = [.gif]
-        panel.allowsMultipleSelection = true
-        panel.message = String(localized: "Choose an animated GIF for your focus friend")
-        guard panel.runModal() == .OK else { return }
-        panel.urls.forEach(importGIF)
-    }
-
-    private func importGIF(_ url: URL) {
-        do {
-            let pet = try model.pets.importGIF(from: url)
-            model.settings.selectedPetID = pet.id
-            importError = nil
-        } catch {
-            importError = String(localized: "This file couldn't be added. Please choose a valid GIF.")
+        .sheet(item: $draft) { draft in
+            AddPetSheet(model: model, draft: draft)
         }
     }
 
@@ -248,7 +229,7 @@ private struct AddPetCard: View {
                             .foregroundStyle(.secondary)
                     }
                     .frame(height: 78)
-                Text("Add GIF…")
+                Text("Add Pet…")
                     .font(.callout)
                     .lineLimit(1)
             }
@@ -360,6 +341,24 @@ struct GeneralSettingsView: View {
                 Toggle("Show menu bar icon", isOn: $settings.showMenuBarIcon)
             }
 
+            Section {
+                Picker("Design", selection: $settings.notchDesign) {
+                    ForEach(NotchDesign.allCases, id: \.self) { design in
+                        Text(design.title).tag(design)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: settings.notchDesign) {
+                    model.notch.peek()
+                }
+                NotchDesignPreview(model: model)
+            } header: {
+                Text("Notch")
+            } footer: {
+                Text("The notch opens for a moment when you switch, so you can see the change in place.")
+                    .foregroundStyle(.secondary)
+            }
+
             Section("Theme") {
                 ThemePicker(selection: $settings.theme)
             }
@@ -369,7 +368,7 @@ struct GeneralSettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: paneWidth, height: 470)
+        .frame(width: paneWidth, height: 720)
     }
 
     private func setLaunchAtLogin(_ enabled: Bool) {
@@ -384,6 +383,37 @@ struct GeneralSettingsView: View {
             loginError = error.localizedDescription
             launchAtLogin = SMAppService.mainApp.status == .enabled
         }
+    }
+}
+
+/// The real notch views, shrunk: collapsed while a timer runs, and open on hover.
+private struct NotchDesignPreview: View {
+    let model: AppModel
+    private let scale: CGFloat = 0.7
+
+    var body: some View {
+        let metrics = model.notch.metrics
+        VStack(spacing: 8) {
+            screenTop(.compact, height: NotchLayout.frameSize(.compact, metrics, .standard).height)
+            // Room for the larger design, so switching doesn't make the pane jump.
+            screenTop(.expanded, height: NotchLayout.frameSize(.expanded, metrics, .standard).height)
+        }
+        .allowsHitTesting(false)
+        .padding(.vertical, 4)
+    }
+
+    private func screenTop(_ mode: NotchMode, height: CGFloat) -> some View {
+        let size = NotchLayout.frameSize(mode, model.notch.metrics, model.settings.notchDesign)
+        return NotchSurface(model: model, mode: mode)
+            .scaleEffect(scale, anchor: .top)
+            .frame(width: size.width * scale, height: size.height * scale, alignment: .top)
+            .frame(maxWidth: .infinity, alignment: .top)
+            .frame(height: height * scale + 14, alignment: .top)
+            .background(
+                LinearGradient(colors: [Color(red: 0.36, green: 0.45, blue: 0.7), Color(red: 0.62, green: 0.5, blue: 0.72)],
+                               startPoint: .top, endPoint: .bottom)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }
 

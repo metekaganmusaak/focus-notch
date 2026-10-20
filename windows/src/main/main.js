@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, Notification, Tray, dialog, ipcMain, nativeImage, nativeTheme, screen } = require('electron');
+const { app, BrowserWindow, Menu, Notification, Tray, ipcMain, nativeImage, nativeTheme, screen } = require('electron');
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -7,7 +7,7 @@ const { pathToFileURL } = require('node:url');
 
 const { PomodoroEngine } = require('./engine');
 const { I18n, LANGUAGES, resolveLanguage } = require('./i18n');
-const { listPets, importGIF, removeCustomPet } = require('./pets');
+const { listPets, addPet, removeCustomPet } = require('./pets');
 const { Store } = require('./store');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -237,26 +237,6 @@ const actions = {
   quit: () => app.quit(),
 };
 
-function importFiles(files) {
-  let added = null;
-  for (const file of files) {
-    try {
-      const record = importGIF(file, customPetsDirectory());
-      if (!record) continue;
-      store.customPets.push(record);
-      added = record;
-    } catch {
-      // Unreadable file: reported below as a failure.
-    }
-  }
-  if (added) {
-    store.settings.selectedPetID = added.id;
-    store.save();
-    broadcast();
-  }
-  return Boolean(added);
-}
-
 function registerIPC() {
   ipcMain.on('get-i18n', (event) => {
     event.returnValue = { language: i18n.language, rtl: i18n.rtl, strings: i18n.strings, languages: LANGUAGES };
@@ -270,6 +250,7 @@ function registerIPC() {
     if (!store.setSetting(key, value)) return;
     if (TIMING_KEYS.has(key)) engine.settingsDidChange();
     if (key === 'notchPosition') positionNotch();
+    if (key === 'notchDesign' && notchWindow && !notchWindow.isDestroyed()) notchWindow.webContents.send('peek');
     if (key === 'language') {
       loadLanguage();
       for (const window of [notchWindow, settingsWindow]) {
@@ -294,15 +275,20 @@ function registerIPC() {
     if (wanted) notchWindow.focus();
     else notchWindow.blur();
   });
-  ipcMain.handle('choose-gif', async () => {
-    const result = await dialog.showOpenDialog(settingsWindow ?? undefined, {
-      title: t('Choose an animated GIF for your focus friend'),
-      filters: [{ name: 'GIF', extensions: ['gif'] }],
-      properties: ['openFile', 'multiSelections'],
-    });
-    return result.canceled ? true : importFiles(result.filePaths);
+  ipcMain.handle('add-pet', (_event, name, gifs) => {
+    let record = null;
+    try {
+      record = addPet(name, gifs, customPetsDirectory());
+    } catch {
+      // Couldn't write the files: reported as a failure.
+    }
+    if (!record) return false;
+    store.customPets.push(record);
+    store.settings.selectedPetID = record.id;
+    store.save();
+    broadcast();
+    return true;
   });
-  ipcMain.handle('import-gifs', (_event, files) => importFiles(files));
   ipcMain.on('set-login-item', (_event, enabled) => {
     app.setLoginItemSettings({ openAtLogin: Boolean(enabled) });
     broadcast();
@@ -524,6 +510,19 @@ async function runSnapshots() {
     settings.webContents.send('debug', { tab });
     await capture(settings, `settings-${tab}`);
   }
+  store.setSetting('notchDesign', 'compact');
+  broadcast();
+  await capture(settings, 'settings-general-compact');
+  notchWindow.webContents.send('debug', { hover: false });
+  await capture(notchWindow, 'notch-5-compact-design');
+  notchWindow.webContents.send('debug', { hover: true });
+  await capture(notchWindow, 'notch-6-expanded-compact-design');
+  notchWindow.webContents.send('debug', { hover: false });
+  presentAlert(makeAlert({ type: 'focusCompleted', next: 'shortBreak', autoStarted: false }));
+  await capture(notchWindow, 'notch-7-alert-compact-design');
+  dismissAlert();
+  settings.webContents.send('debug', { newPet: [path.join(ASSETS, 'icon.png'), path.join(ASSETS, 'pets', 'cute_fox_rest.gif')].map((file) => pathToFileURL(file).href) });
+  await capture(settings, 'settings-new-pet');
   app.exit(0);
 }
 

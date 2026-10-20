@@ -290,10 +290,53 @@ button:disabled { opacity: 0.35; pointer-events: none; }
 .alert-title { display: block; font-size: 15px; }
 .alert-message { margin: 3px 0 0; font-size: 12px; color: rgba(255, 255, 255, 0.65); line-height: 1.35; }
 
+/* Compact design: narrower pill and smaller panels, as NotchViews.swift with `compact`. */
+body.design-compact #compact { padding: 0 10px; }
+body.design-compact #compact .wing { gap: 4px; }
+body.design-compact #compact .pet, body.design-compact #compact .phase-icon { width: 22px; height: 22px; }
+body.design-compact #compact .compact-time { font-size: 12px; }
+body.design-compact.size-small #compact .pet, body.design-compact.size-small #compact .phase-icon { width: 18px; height: 18px; }
+body.design-compact.size-small #compact .compact-time { font-size: 11px; }
+body.design-compact .header { padding: 0 14px; }
+body.design-compact .side { gap: 8px; }
+body.design-compact .phase-badge { gap: 5px; padding: 3px 8px; font-size: 11px; }
+body.design-compact .today .sep, body.design-compact .today-time { display: none; }
+body.design-compact .main { gap: 12px; padding: 0 16px; }
+body.design-compact .avatar { width: 60px; height: 60px; }
+body.design-compact .avatar .pet, body.design-compact .avatar .phase-icon { width: 42px; height: 42px; }
+body.design-compact .ring circle { stroke-width: 6.5; }
+body.design-compact .time-column { gap: 1px; }
+body.design-compact .subtitle { font-size: 11px; }
+body.design-compact .big-time { font-size: 30px; }
+body.design-compact .dots { margin-top: 4px; }
+body.design-compact .controls { flex-direction: row; gap: 8px; }
+body.design-compact .trio { gap: 8px; }
+body.design-compact .icon-button:not(.small) { width: 26px; height: 26px; }
+body.design-compact .icon-button.primary { width: 38px; height: 38px; }
+body.design-compact .icon-button:not(.small) .icon { width: 12px; height: 12px; }
+body.design-compact .icon-button.primary .icon { width: 16px; height: 16px; }
+/* Finish becomes an icon in the same row. */
+body.design-compact [data-action="finish"] { width: 26px; height: 26px; padding: 0; justify-content: center; }
+body.design-compact [data-action="finish"] span { display: none; }
+body.design-compact .topics { margin: 0 16px 10px; }
+body.design-compact .alert-body { gap: 10px; padding: 0 16px; }
+body.design-compact .alert-pet { width: 46px; height: 46px; }
+body.design-compact .alert-pet .pet, body.design-compact .alert-pet .phase-icon { width: 34px; height: 34px; }
+body.design-compact .alert-title { font-size: 13px; }
+body.design-compact .alert-message {
+  margin-top: 2px;
+  font-size: 11px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Standing in a bottom taskbar: the shape grows upward, so the status strip moves to the bottom. */
 body.bottom-edge .view { top: auto; bottom: 0; transform-origin: bottom center; }
 body.bottom-edge #expanded { flex-direction: column-reverse; }
 body.bottom-edge .topics { margin: 14px 22px 0; }
+body.bottom-edge.design-compact .topics { margin: 10px 16px 0; }
 body.bottom-edge .alert-body { margin-top: 0; margin-bottom: var(--notch-height); }
 body.bottom-edge.open #shape { filter: drop-shadow(0 -8px 18px rgba(0, 0, 0, 0.45)); }
 .header { cursor: grab; }

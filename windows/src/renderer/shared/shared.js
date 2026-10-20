@@ -76,9 +76,30 @@
     return `<svg class="icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PATHS[name] ?? ''}</svg>`;
   }
 
+  // A virtual notch has no hardware cutout, so the pet and countdown sit side by side
+  // with no gap. Widths of the collapsed pill per `notchSize`, so it fits a busy taskbar.
+  const NOTCH_WIDTHS = {
+    small: { idle: 64, compact: 132 },
+    medium: { idle: 110, compact: 200 },
+    large: { idle: 180, compact: 300 },
+  };
+
+  /// Body size and corner radii of the notch per mode, as in NotchLayout.swift.
+  /// `band` is the height of the bar the notch sits in (menu bar or taskbar).
+  function notchLayout(mode, { size, design, band }) {
+    const widths = NOTCH_WIDTHS[size] ?? NOTCH_WIDTHS.medium;
+    const compact = design === 'compact';
+    switch (mode) {
+      case 'compact': return { w: widths.compact - (compact ? 32 : 0), h: band, top: 6, bottom: 12 };
+      case 'expanded': return { w: compact ? 420 : 510, h: band + (compact ? 116 : 170), top: 14, bottom: 30 };
+      case 'alert': return { w: compact ? 420 : 470, h: band + (compact ? 74 : 96), top: 14, bottom: 30 };
+      default: return { w: widths.idle, h: band, top: 6, bottom: 12 };
+    }
+  }
+
   function escapeHTML(text) {
     return String(text).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   }
 
-  window.FN = { t, duration, clock, phaseColor, THEMES, THEME_NAMES, PHASE_TITLES, icon, escapeHTML, languages: data.languages, language: data.language };
+  window.FN = { t, duration, clock, phaseColor, THEMES, THEME_NAMES, PHASE_TITLES, icon, escapeHTML, notchLayout, languages: data.languages, language: data.language };
 })();

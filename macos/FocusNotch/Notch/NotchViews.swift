@@ -4,9 +4,20 @@ struct NotchRootView: View {
     let model: AppModel
 
     var body: some View {
-        let mode = model.notchMode
+        NotchSurface(model: model, mode: model.notchMode)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+    }
+}
+
+/// The black notch shape with its content for one mode. Also used for the design preview in settings.
+struct NotchSurface: View {
+    let model: AppModel
+    let mode: NotchMode
+
+    var body: some View {
         let metrics = model.notch.metrics
-        let body = NotchLayout.bodySize(mode, metrics)
+        let design = model.settings.notchDesign
+        let body = NotchLayout.bodySize(mode, metrics, design)
         let radii = NotchLayout.radii(mode, metrics)
         let shape = NotchShape(topRadius: radii.top, bottomRadius: radii.bottom)
 
@@ -15,14 +26,14 @@ struct NotchRootView: View {
             case .hidden, .idle:
                 Color.clear
             case .compact:
-                CompactNotchView(model: model, metrics: metrics)
+                CompactNotchView(model: model, metrics: metrics, design: design)
                     .transition(.blurReplace)
             case .expanded:
-                ExpandedNotchView(model: model, metrics: metrics, width: body.width)
+                ExpandedNotchView(model: model, metrics: metrics, width: body.width, compact: design == .compact)
                     .transition(.blurReplace.combined(with: .scale(0.92, anchor: .top)))
             case .alert:
                 if let alert = model.notch.alert {
-                    AlertNotchView(model: model, alert: alert, metrics: metrics, width: body.width)
+                    AlertNotchView(model: model, alert: alert, metrics: metrics, width: body.width, compact: design == .compact)
                         .transition(.blurReplace.combined(with: .scale(0.92, anchor: .top)))
                 }
             }
@@ -34,9 +45,9 @@ struct NotchRootView: View {
         .shadow(color: .black.opacity(mode.isOpen ? 0.45 : 0), radius: 18, y: 8)
         .opacity(mode == .hidden ? 0 : 1)
         .environment(\.colorScheme, .dark)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .animation(.spring(response: 0.42, dampingFraction: 0.8), value: mode)
         .animation(.spring(response: 0.42, dampingFraction: 0.8), value: metrics)
+        .animation(.spring(response: 0.42, dampingFraction: 0.8), value: design)
     }
 }
 
@@ -46,32 +57,37 @@ struct NotchRootView: View {
 private struct CompactNotchView: View {
     let model: AppModel
     let metrics: NotchMetrics
+    let design: NotchDesign
 
     var body: some View {
         let engine = model.engine
         let tint = engine.phase.tint
-        let wing = NotchLayout.compactWing - 12
+        let wing = NotchLayout.compactWing(design) - 12
+        let compact = design == .compact
+        let petSize = max(metrics.notchHeight - (compact ? 12 : 8), 16)
 
         HStack(spacing: 0) {
             PetView(pet: model.activePet, mood: model.petMood, fallbackSymbol: engine.phase.symbol, tint: tint)
-                .frame(width: max(metrics.notchHeight - 8, 16), height: max(metrics.notchHeight - 8, 16))
+                .frame(width: petSize, height: petSize)
                 .frame(width: wing, alignment: .leading)
 
             Spacer(minLength: metrics.notchWidth)
 
-            HStack(spacing: 5) {
+            HStack(spacing: compact ? 4 : 5) {
                 switch engine.state {
                 case .running:
-                    ProgressRing(progress: engine.progress, tint: tint, lineWidth: 2.5)
-                        .frame(width: 12, height: 12)
+                    ProgressRing(progress: engine.progress, tint: tint, lineWidth: compact ? 2 : 2.5)
+                        .frame(width: compact ? 10 : 12, height: compact ? 10 : 12)
                 case .paused:
-                    Image(systemName: "pause.fill").font(.system(size: 9, weight: .heavy))
+                    Image(systemName: "pause.fill").font(.system(size: compact ? 8 : 9, weight: .heavy))
                 case .idle:
-                    Image(systemName: "play.fill").font(.system(size: 9, weight: .heavy))
+                    Image(systemName: "play.fill").font(.system(size: compact ? 8 : 9, weight: .heavy))
                 }
                 Text(TimeFormat.clock(engine.remaining))
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.system(size: compact ? 11 : 13, weight: .semibold, design: .rounded))
                     .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(compact ? 0.7 : 1)
                     .contentTransition(.numericText(countsDown: true))
                     .animation(.snappy, value: engine.remaining)
             }
@@ -89,6 +105,7 @@ private struct ExpandedNotchView: View {
     let model: AppModel
     let metrics: NotchMetrics
     let width: CGFloat
+    let compact: Bool
 
     private var engine: PomodoroEngine { model.engine }
 
@@ -98,11 +115,11 @@ private struct ExpandedNotchView: View {
 
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                PhaseBadge(phase: engine.phase, state: engine.state)
+                PhaseBadge(phase: engine.phase, state: engine.state, compact: compact)
                     .frame(width: side, alignment: .leading)
                 Spacer(minLength: 0)
-                HStack(spacing: 10) {
-                    TodayBadge(stats: model.stats)
+                HStack(spacing: compact ? 8 : 10) {
+                    TodayBadge(stats: model.stats, showsTime: !compact)
                     Button {
                         model.openSettings()
                     } label: {
@@ -113,20 +130,20 @@ private struct ExpandedNotchView: View {
                 }
                 .frame(width: side, alignment: .trailing)
             }
-            .padding(.horizontal, 18)
+            .padding(.horizontal, compact ? 14 : 18)
             .frame(height: metrics.notchHeight)
 
-            HStack(spacing: 18) {
-                PetAvatar(model: model, tint: tint)
-                    .frame(width: 92, height: 92)
+            HStack(spacing: compact ? 12 : 18) {
+                PetAvatar(model: model, tint: tint, compact: compact)
+                    .frame(width: compact ? 60 : 92, height: compact ? 60 : 92)
 
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: compact ? 1 : 2) {
                     Text(subtitle)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: compact ? 11 : 12, weight: .medium))
                         .foregroundStyle(.white.opacity(0.55))
                         .lineLimit(1)
                     Text(TimeFormat.clock(engine.remaining))
-                        .font(.system(size: 46, weight: .semibold, design: .rounded))
+                        .font(.system(size: compact ? 30 : 46, weight: .semibold, design: .rounded))
                         .monospacedDigit()
                         .foregroundStyle(.white)
                         .contentTransition(.numericText(countsDown: true))
@@ -139,19 +156,19 @@ private struct ExpandedNotchView: View {
                         currentProgress: engine.phase == .focus ? engine.progress : nil,
                         tint: PomodoroPhase.focus.tint
                     )
-                    .padding(.top, 4)
+                    .padding(.top, compact ? 2 : 4)
                 }
 
                 Spacer(minLength: 0)
 
-                ControlsView(engine: engine, tint: tint)
+                ControlsView(engine: engine, tint: tint, compact: compact)
             }
-            .padding(.horizontal, 22)
+            .padding(.horizontal, compact ? 16 : 22)
             .frame(maxHeight: .infinity)
 
             TopicBar(model: model, tint: tint)
-                .padding(.horizontal, 22)
-                .padding(.bottom, 14)
+                .padding(.horizontal, compact ? 16 : 22)
+                .padding(.bottom, compact ? 10 : 14)
         }
     }
 
@@ -170,15 +187,16 @@ private struct ExpandedNotchView: View {
 private struct PhaseBadge: View {
     let phase: PomodoroPhase
     let state: TimerState
+    var compact = false
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: compact ? 5 : 6) {
             Circle()
                 .fill(phase.tint)
                 .frame(width: 7, height: 7)
                 .shadow(color: phase.tint.opacity(0.8), radius: state == .running ? 4 : 0)
             Text(phase.title)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.system(size: compact ? 11 : 12, weight: .semibold))
                 .foregroundStyle(.white)
             if state == .paused {
                 Text("Paused")
@@ -187,14 +205,15 @@ private struct PhaseBadge: View {
             }
         }
         .lineLimit(1)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 4)
+        .padding(.horizontal, compact ? 8 : 10)
+        .padding(.vertical, compact ? 3 : 4)
         .background(Capsule().fill(phase.tint.opacity(0.16)))
     }
 }
 
 private struct TodayBadge: View {
     let stats: StatsStore
+    var showsTime = true
 
     var body: some View {
         let today = stats.today
@@ -203,10 +222,12 @@ private struct TodayBadge: View {
                 .foregroundStyle(Color.orange.gradient)
             Text(verbatim: "\(today.sessions)")
                 .foregroundStyle(.white)
-            Text(verbatim: "·")
-                .foregroundStyle(.white.opacity(0.35))
-            Text(TimeFormat.short(today.focusSeconds))
-                .foregroundStyle(.white.opacity(0.7))
+            if showsTime {
+                Text(verbatim: "·")
+                    .foregroundStyle(.white.opacity(0.35))
+                Text(TimeFormat.short(today.focusSeconds))
+                    .foregroundStyle(.white.opacity(0.7))
+            }
         }
         .font(.system(size: 11, weight: .semibold, design: .rounded))
         .lineLimit(1)
@@ -218,13 +239,14 @@ private struct TodayBadge: View {
 private struct PetAvatar: View {
     let model: AppModel
     let tint: Color
+    var compact = false
 
     var body: some View {
         ZStack {
             Circle().fill(.white.opacity(0.06))
-            ProgressRing(progress: model.engine.progress, tint: tint, lineWidth: 5)
+            ProgressRing(progress: model.engine.progress, tint: tint, lineWidth: compact ? 4 : 5)
             PetView(pet: model.activePet, mood: model.petMood, fallbackSymbol: model.engine.phase.symbol, tint: tint)
-                .frame(width: 64, height: 64)
+                .frame(width: compact ? 42 : 64, height: compact ? 42 : 64)
         }
         .contentShape(Circle())
         .onTapGesture {
@@ -236,46 +258,65 @@ private struct PetAvatar: View {
 private struct ControlsView: View {
     let engine: PomodoroEngine
     let tint: Color
+    var compact = false
 
     var body: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
-                Button {
-                    engine.reset()
-                } label: {
-                    Image(systemName: "arrow.counterclockwise")
-                }
-                .buttonStyle(NotchIconButtonStyle(size: 34))
-                .disabled(engine.isPristine)
-                .help("Reset")
-
-                Button {
-                    engine.toggle()
-                } label: {
-                    Image(systemName: engine.isRunning ? "pause.fill" : "play.fill")
-                        .contentTransition(.symbolEffect(.replace))
-                }
-                .buttonStyle(NotchIconButtonStyle(size: 50, tint: tint))
-                .help(engine.isRunning ? "Pause" : (engine.state == .paused ? "Resume" : "Start"))
-
-                Button {
-                    engine.skip()
-                } label: {
-                    Image(systemName: "forward.end.fill")
-                }
-                .buttonStyle(NotchIconButtonStyle(size: 34))
-                .help("Skip")
+        if compact {
+            // One row, with Finish as an icon.
+            HStack(spacing: 8) {
+                buttons(small: 26, large: 38)
+                finishButton
+                    .labelStyle(.iconOnly)
+                    .buttonStyle(NotchIconButtonStyle(size: 26))
             }
-
-            Button {
-                engine.finish()
-            } label: {
-                Label("Finish", systemImage: "flag.checkered")
+        } else {
+            VStack(spacing: 10) {
+                HStack(spacing: 10) {
+                    buttons(small: 34, large: 50)
+                }
+                finishButton
+                    .buttonStyle(NotchCapsuleButtonStyle())
             }
-            .buttonStyle(NotchCapsuleButtonStyle())
-            .disabled(!engine.isSessionActive)
-            .help("End this session and see your summary")
         }
+    }
+
+    @ViewBuilder
+    private func buttons(small: CGFloat, large: CGFloat) -> some View {
+        Button {
+            engine.reset()
+        } label: {
+            Image(systemName: "arrow.counterclockwise")
+        }
+        .buttonStyle(NotchIconButtonStyle(size: small))
+        .disabled(engine.isPristine)
+        .help("Reset")
+
+        Button {
+            engine.toggle()
+        } label: {
+            Image(systemName: engine.isRunning ? "pause.fill" : "play.fill")
+                .contentTransition(.symbolEffect(.replace))
+        }
+        .buttonStyle(NotchIconButtonStyle(size: large, tint: tint))
+        .help(engine.isRunning ? "Pause" : (engine.state == .paused ? "Resume" : "Start"))
+
+        Button {
+            engine.skip()
+        } label: {
+            Image(systemName: "forward.end.fill")
+        }
+        .buttonStyle(NotchIconButtonStyle(size: small))
+        .help("Skip")
+    }
+
+    private var finishButton: some View {
+        Button {
+            engine.finish()
+        } label: {
+            Label("Finish", systemImage: "flag.checkered")
+        }
+        .disabled(!engine.isSessionActive)
+        .help("End this session and see your summary")
     }
 }
 
@@ -389,27 +430,28 @@ private struct AlertNotchView: View {
     let alert: NotchAlert
     let metrics: NotchMetrics
     let width: CGFloat
+    let compact: Bool
 
     var body: some View {
         VStack(spacing: 0) {
             Color.clear.frame(height: metrics.notchHeight)
 
-            HStack(spacing: 14) {
+            HStack(spacing: compact ? 10 : 14) {
                 ZStack {
                     Circle().fill(alert.tint.opacity(0.14))
                     PetView(pet: model.activePet, mood: alert.mood, fallbackSymbol: "bell.fill", tint: alert.tint)
-                        .frame(width: 48, height: 48)
+                        .frame(width: compact ? 34 : 48, height: compact ? 34 : 48)
                 }
-                .frame(width: 64, height: 64)
+                .frame(width: compact ? 46 : 64, height: compact ? 46 : 64)
 
-                VStack(alignment: .leading, spacing: 3) {
+                VStack(alignment: .leading, spacing: compact ? 2 : 3) {
                     Text(alert.title)
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.system(size: compact ? 13 : 15, weight: .semibold))
                         .foregroundStyle(.white)
                     Text(alert.message)
-                        .font(.system(size: 12))
+                        .font(.system(size: compact ? 11 : 12))
                         .foregroundStyle(.white.opacity(0.65))
-                        .lineLimit(3)
+                        .lineLimit(compact ? 2 : 3)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -427,10 +469,10 @@ private struct AlertNotchView: View {
                 } label: {
                     Image(systemName: "xmark")
                 }
-                .buttonStyle(NotchIconButtonStyle(size: 24))
+                .buttonStyle(NotchIconButtonStyle(size: compact ? 22 : 24))
                 .help("Dismiss")
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, compact ? 16 : 20)
             .frame(maxHeight: .infinity)
         }
     }

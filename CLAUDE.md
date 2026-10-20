@@ -15,7 +15,7 @@ A Pomodoro timer that lives in the MacBook notch (macOS) or a virtual notch (Win
   - `Tools/PetForge` — Swift package: `pixel`, `cute`, `icon`, `sounds` commands that generate the resources. `Tools/Art` holds the Codex source art.
 - `windows/` — Electron port with the same features. See `windows/README.md`.
   - `src/main` — `main.js` (windows, tray, IPC, alerts), `engine.js` (port of PomodoroEngine.swift), `store.js`, `i18n.js`, `pets.js`, `preload.js`.
-  - `src/renderer/notch` — virtual notch: fixed 760×300 transparent window, spring-animated SVG shape, content clipped to it. On Windows it stands in the bottom taskbar and grows upward (`placement` from `positionNotch()` in main.js; position via `notchPosition` setting or dragging the status strip; collapsed width via `notchSize` small/medium/large; `--taskbar` previews it on other OSes).
+  - `src/renderer/notch` — virtual notch: fixed 760×300 transparent window, spring-animated SVG shape, content clipped to it. On Windows it stands in the bottom taskbar and grows upward (`placement` from `positionNotch()` in main.js; position via `notchPosition` setting or dragging the status strip; collapsed width via `notchSize` small/medium/large; `notchDesign` standard/compact shrinks the pill and panels; `--taskbar` previews it on other OSes).
   - `src/renderer/settings` — settings window. `src/renderer/shared/shared.js` — `FN` helpers (t, duration, themes, icons).
   - `scripts/sync-assets.mjs` copies pets/sounds/icon from `macos/` and converts the String Catalog to `assets/locales/*.json`.
 
@@ -28,7 +28,7 @@ A Pomodoro timer that lives in the MacBook notch (macOS) or a virtual notch (Win
 
 ## Conventions
 
-- Keep the two apps' behavior in sync: engine logic, alert texts, sizes (`NotchLayout.swift` ↔ `layout()` in `notch.js`), theme colors (`Theme.swift` ↔ `THEMES` in `shared.js`).
+- Keep the two apps' behavior in sync: engine logic, alert texts, sizes and the Standard/Compact design (`NotchLayout.swift` + `NotchViews.swift` ↔ `notchLayout()` in `shared.js` + `design-compact` rules in `notch.css`, mirrored by the preview in `settings.js`), theme colors (`Theme.swift` ↔ `THEMES` in `shared.js`), custom pet image → GIF conversion (`PetGIFMaker.swift` ↔ `gif-maker.js`).
 - All UI text goes through the String Catalog with English keys. After adding strings, translate all 22 languages (tr, zh-Hans, zh-Hant, hi, es, fr, ar, bn, pt-BR, ru, ur, id, de, ja, ko, vi, it, fa, pl, uk, th, nl) and run `npm run sync` in `windows/`. Windows reuses the macOS keys; avoid Windows-only strings.
 - Swift: default MainActor isolation, `@Observable` stores, comments only where the why isn't obvious.
 - Sounds must be original or CC0; record sources in `ASSETS.md`.

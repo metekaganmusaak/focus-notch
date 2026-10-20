@@ -35,7 +35,7 @@ open /Applications/FocusNotch.app
 | `FocusNotch/App` | App entry point, `AppModel` (connects timer events to the notch, sounds and notifications), menu bar menu |
 | `FocusNotch/Timer` | `PomodoroEngine` (phases, reminders, finishing), `StatsStore` (per day and per topic), `TopicStore` |
 | `FocusNotch/Notch` | The notch panel, its shape, hover tracking and SwiftUI views |
-| `FocusNotch/Pets` | `PetStore` (bundled cute and pixel pets plus custom GIFs) and the GIF player |
+| `FocusNotch/Pets` | `PetStore` (bundled cute and pixel pets plus custom pets), `PetGIFMaker` (turns user images into per-mood GIFs) and the GIF player |
 | `FocusNotch/Settings` | `SettingsStore` and the settings window |
 | `FocusNotch/Support` | Themes, time formatting, notifications, language override |
 | `FocusNotch/Resources` | Pet GIFs, sounds, app icon, `Localizable.xcstrings` |

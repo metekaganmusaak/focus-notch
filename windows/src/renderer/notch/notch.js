@@ -1,31 +1,18 @@
 (() => {
   const api = window.focusNotch;
-  const { t, duration, clock, phaseColor, PHASE_TITLES, icon, escapeHTML } = window.FN;
+  const { t, duration, clock, phaseColor, PHASE_TITLES, icon, escapeHTML, notchLayout } = window.FN;
 
   const WINDOW_HEIGHT = 300;
-  // A virtual notch: PCs have no hardware notch, so the pet and countdown sit side by
-  // side with no gap. Widths of the collapsed pill per size setting, so it fits a busy taskbar.
-  const SIZES = {
-    small: { idle: 64, compact: 132 },
-    medium: { idle: 110, compact: 200 },
-    large: { idle: 180, compact: 300 },
-  };
+  const SIZE_NAMES = ['small', 'medium', 'large'];
   /// The latest app state from the main process.
   let model = null;
-  const size = () => SIZES[model?.settings.notchSize] ?? SIZES.medium;
   /// Set by the app: which screen edge the notch is on, the height of the bar it
   /// sits in (menu bar or taskbar), and its horizontal center inside the window.
   let place = { edge: 'top', band: 34, anchorX: 380 };
   const PHASE_ICONS = { focus: 'timer', shortBreak: 'clock', longBreak: 'clock' };
 
-  /// Body size and corner radii per mode, as in NotchLayout.swift.
   function layout(mode) {
-    switch (mode) {
-      case 'compact': return { w: size().compact, h: place.band, top: 6, bottom: 12 };
-      case 'expanded': return { w: 510, h: place.band + 170, top: 14, bottom: 30 };
-      case 'alert': return { w: 470, h: place.band + 96, top: 14, bottom: 30 };
-      default: return { w: size().idle, h: place.band, top: 6, bottom: 12 };
-    }
+    return notchLayout(mode, { size: model?.settings.notchSize, design: model?.settings.notchDesign, band: place.band });
   }
   const isOpen = (mode) => mode === 'expanded' || mode === 'alert';
 
@@ -36,7 +23,9 @@
 
   function placeViews() {
     document.body.classList.toggle('bottom-edge', place.edge === 'bottom');
-    for (const name of Object.keys(SIZES)) document.body.classList.toggle(`size-${name}`, size() === SIZES[name]);
+    const size = SIZE_NAMES.includes(model?.settings.notchSize) ? model.settings.notchSize : 'medium';
+    for (const name of SIZE_NAMES) document.body.classList.toggle(`size-${name}`, size === name);
+    document.body.classList.toggle('design-compact', model?.settings.notchDesign === 'compact');
     document.body.style.setProperty('--notch-height', `${place.band}px`);
     for (const view of Object.values(views)) {
       view.style.width = `${layout(view.id).w}px`;
@@ -118,11 +107,14 @@
   let hoverTimer = null;
   let forcedHover = null;
   let drag = null;
+  /// Opens the panel for a moment, e.g. to show a new design.
+  let peeking = false;
+  let peekTimer = null;
 
   function computeMode() {
     if (!model) return 'idle';
     if (model.alert) return 'alert';
-    if (forcedHover ?? (hovering || editingTopic || drag)) return 'expanded';
+    if (forcedHover ?? (hovering || editingTopic || drag || peeking)) return 'expanded';
     if (model.engine.isSessionActive) return 'compact';
     return 'idle';
   }
@@ -308,12 +300,12 @@
     action.textContent = alert.action ?? '';
   }
 
-  let renderedSize = null;
+  let renderedLook = null;
 
   function applyPlacement(next, first) {
-    const sizeChanged = renderedSize !== model.settings.notchSize;
-    if (!sizeChanged && (!next || JSON.stringify(next) === JSON.stringify(place))) return;
-    renderedSize = model.settings.notchSize;
+    const look = `${model.settings.notchSize}/${model.settings.notchDesign}`;
+    if (look === renderedLook && (!next || JSON.stringify(next) === JSON.stringify(place))) return;
+    renderedLook = look;
     if (next) place = next;
     placeViews();
     if (first) {
@@ -383,6 +375,16 @@
     const audio = new Audio(url);
     audio.volume = 0.9;
     audio.play().catch(() => {});
+  });
+
+  api.onPeek(() => {
+    peeking = true;
+    clearTimeout(peekTimer);
+    peekTimer = setTimeout(() => {
+      peeking = false;
+      applyMode();
+    }, 4000);
+    applyMode();
   });
 
   api.onDebug((options) => {
